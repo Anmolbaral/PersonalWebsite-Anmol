@@ -2,16 +2,16 @@
 
 A beautiful, minimalist portfolio website featuring an AI-powered chatbot that answers questions about Anmol Baruwal's experience, skills, and projects. Built with React, TypeScript, Node.js, and OpenAI.
 
-## ✨ Features
+## Features
 
-- 🤖 **AI-Powered Chatbot**: Intelligent responses about Anmol's background using OpenAI
-- 🎨 **Glassmorphism UI**: Modern, translucent design with animated gradients
-- 🌓 **Theme Toggle**: Switch between dark and light themes
-- 📱 **Responsive Design**: Works perfectly on all devices
-- ⚡ **Real-time Chat**: Instant responses with typing indicators
-- 🔒 **Secure API**: Backend with proper error handling and validation
+- **AI-Powered Chatbot**: Intelligent responses about Anmol's background using OpenAI
+- **Glassmorphism UI**: Modern, translucent design with animated gradients
+- **Theme Toggle**: Switch between dark and light themes
+- **Responsive Design**: Works perfectly on all devices
+- **Real-time Chat**: Instant responses with typing indicators
+- **Secure API**: Backend with proper error handling and validation
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 - **React 18** with TypeScript
@@ -25,7 +25,7 @@ A beautiful, minimalist portfolio website featuring an AI-powered chatbot that a
 - **OpenAI API** for AI responses
 - **CORS** enabled for cross-origin requests
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js (v16 or higher)
@@ -67,7 +67,7 @@ A beautiful, minimalist portfolio website featuring an AI-powered chatbot that a
 
    This will start both frontend (port 5173) and backend (port 3001) servers.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 portfolio-chatbot/
@@ -90,7 +90,7 @@ portfolio-chatbot/
 └── README.md
 ```
 
-## 🎨 Design System
+## Design System
 
 The application uses a custom glassmorphism design system with:
 
@@ -100,7 +100,7 @@ The application uses a custom glassmorphism design system with:
 - **Custom Scrollbars**: Styled scrollbars for better UX
 - **Responsive Layout**: Mobile-first design approach
 
-## 🤖 AI Integration
+## AI Integration
 
 The chatbot uses OpenAI's GPT-3.5-turbo model with:
 
@@ -109,7 +109,7 @@ The chatbot uses OpenAI's GPT-3.5-turbo model with:
 - **Error Handling**: Graceful fallbacks for API issues
 - **Response Limiting**: Controlled token usage for cost management
 
-## 📝 Customization
+## Customization
 
 ### Updating Personal Information
 Edit `backend/context.md` with your:
@@ -132,7 +132,7 @@ Adjust `backend/src/index.ts` for:
 - Response parameters
 - Error handling logic
 
-## 🚀 Deployment
+## Deployment
 
 ### Frontend (Vercel/Netlify)
 ```bash
@@ -148,7 +148,7 @@ npm run build
 # Deploy with environment variables
 ```
 
-## 🔧 Development Scripts
+## Development Scripts
 
 ```bash
 # Run both frontend and backend
@@ -167,7 +167,7 @@ npm run build
 npm run install:all
 ```
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -175,11 +175,11 @@ npm run install:all
 4. Test thoroughly
 5. Submit a pull request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
 
-## 👨‍💻 Author
+## Author
 
 **Anmol Baruwal**
 - Email: [your-email@example.com]
@@ -188,4 +188,4 @@ This project is licensed under the MIT License.
 
 ---
 
-*Built with ❤️ using modern web technologies*
+*Built with modern web technologies*
