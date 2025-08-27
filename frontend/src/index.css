@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --bg-gradient: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #13547a);
+    --chat-bg: rgba(0, 0, 0, 0.15);
+    --border-color: rgba(255, 255, 255, 0.2);
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --input-bg: rgba(0, 0, 0, 0.2);
+    --suggestion-bg: rgba(255, 255, 255, 0.1);
+    --suggestion-hover-bg: rgba(255, 255, 255, 0.2);
+    --ai-bubble-bg: #f1f5f9;
+    --ai-bubble-text: #1e293b;
+    --user-bubble-bg: #3b82f6;
+    --user-bubble-text: white;
+    --status-border: #374151;
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.light-theme {
+    --bg-gradient: linear-gradient(-45deg, #e0c3fc, #8ec5fc, #a8edea, #fed6e3);
+    --chat-bg: rgba(255, 255, 255, 0.3);
+    --border-color: rgba(255, 255, 255, 0.5);
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --input-bg: rgba(255, 255, 255, 0.4);
+    --suggestion-bg: rgba(0, 0, 0, 0.05);
+    --suggestion-hover-bg: rgba(0, 0, 0, 0.1);
+    --ai-bubble-bg: white;
+    --ai-bubble-text: #1e293b;
+    --status-border: #e5e7eb;
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    transition: background 0.5s ease;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
