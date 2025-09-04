@@ -30,24 +30,24 @@ const openai = new OpenAI({
 app.use(cors());
 app.use(express.json());
 
-// Rate limiting
+// Rate limiting - Optimized for free tier usage
 const chatLimiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 10, // limit each IP to 20 requests per windowMs
+  windowMs: 5 * 60 * 1000, // 5 minutes
+  max: 5, // limit each IP to 5 requests per 5 minutes
   message: {
     error: 'Too many chat requests, please try again later.',
-    retryAfter: 60
+    retryAfter: 300
   },
   standardHeaders: true,
   legacyHeaders: false,
 });
 
 const noteLimiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 2, // limit each IP to 5 note submissions per windowMs
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 1, // limit each IP to 1 note submission per 10 minutes
   message: {
     error: 'Too many note submissions, please try again later.',
-    retryAfter: 60
+    retryAfter: 600
   },
   standardHeaders: true,
   legacyHeaders: false,
@@ -197,6 +197,25 @@ app.get('/api/notes', async (req, res) => {
   }
 });
 
+// Usage monitoring endpoint
+app.get('/api/usage', async (req, res) => {
+  try {
+    const notes = await sheetsHelper.getAllNotes();
+    const cacheStatus = sheetsHelper.getCacheStatus();
+    const usage = {
+      totalNotes: notes.length,
+      cacheStatus: cacheStatus,
+      serverUptime: process.uptime(),
+      memoryUsage: process.memoryUsage(),
+      environment: process.env.NODE_ENV || 'development',
+      timestamp: new Date().toISOString()
+    };
+    res.json(usage);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to get usage stats' });
+  }
+});
+
 // Serve admin page
 app.get('/admin', (req, res) => {
   const adminPath = path.join(__dirname, '../admin.html');
@@ -208,4 +227,5 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Chat API available at http://localhost:${PORT}/api/chat`);
   console.log(`Health check at http://localhost:${PORT}/api/health`);
+  console.log(`Usage monitoring at http://localhost:${PORT}/api/usage`);
 });

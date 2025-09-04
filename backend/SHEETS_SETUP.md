@@ -18,9 +18,19 @@ gcloud run services update portfolio-backend \
   --set-env-vars SHEET_ID="YOUR_SHEET_ID_HERE"
 ```
 
-### 3. Deploy the Updated Backend
+### 3. Deploy the Updated Backend (Free Tier Optimized)
 ```bash
-gcloud run deploy portfolio-backend --source . --platform managed --region us-central1 --allow-unauthenticated
+gcloud run deploy portfolio-backend \
+  --source . \
+  --platform managed \
+  --region us-central1 \
+  --memory 256Mi \
+  --cpu 1 \
+  --max-instances 1 \
+  --min-instances 0 \
+  --timeout 300 \
+  --concurrency 10 \
+  --allow-unauthenticated
 ```
 
 ### 4. Test the Integration

@@ -182,9 +182,7 @@ This project is licensed under the MIT License.
 ## Author
 
 **Anmol Baruwal**
-- Email: [your-email@example.com]
-- LinkedIn: [your-linkedin]
-- GitHub: [your-github]
+- https://anmol-5831c.web.app/
 
 ---
 

@@ -13,6 +13,9 @@ interface Note {
 class SheetsHelper {
   private sheets: any;
   private sheetId: string;
+  private notesCache: Note[] = [];
+  private cacheTimestamp: number = 0;
+  private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes cache
 
   constructor() {
     this.sheetId = process.env.SHEET_ID || '';
@@ -130,6 +133,13 @@ class SheetsHelper {
       return [];
     }
 
+    // Return cached data if still valid
+    const now = Date.now();
+    if (this.notesCache.length > 0 && (now - this.cacheTimestamp) < this.CACHE_DURATION) {
+      console.log('Returning cached notes data');
+      return this.notesCache;
+    }
+
     try {
       const response = await this.sheets.spreadsheets.values.get({
         spreadsheetId: this.sheetId,
@@ -138,7 +148,7 @@ class SheetsHelper {
 
       const rows = response.data.values || [];
       
-      return rows.map((row: any[]) => ({
+      this.notesCache = rows.map((row: any[]) => ({
         id: row[0] || '',
         timestamp: row[1] || '',
         name: row[2] || '',
@@ -147,10 +157,24 @@ class SheetsHelper {
         contactInfo: row[5] || '',
         ip: row[6] || ''
       }));
+      
+      this.cacheTimestamp = now;
+      console.log(`Fetched ${this.notesCache.length} notes from Google Sheet`);
+      return this.notesCache;
     } catch (error) {
       console.error('Error reading notes from Google Sheet:', error);
-      return [];
+      return this.notesCache; // Return cached data even if API fails
     }
+  }
+
+  getCacheStatus() {
+    const now = Date.now();
+    return {
+      hasCache: this.notesCache.length > 0,
+      cacheAge: now - this.cacheTimestamp,
+      cacheValid: (now - this.cacheTimestamp) < this.CACHE_DURATION,
+      cacheSize: this.notesCache.length
+    };
   }
 }
 
