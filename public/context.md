@@ -102,12 +102,26 @@ Karkhana — Content Designer (STEM/Robotics)
 
 ## Projects
 
-### Project 1: AI Profile Builder
+### DocsRAG
+**Duration**: Feb 2025 - June 2025
+- Built a Career Intelligence Platform to extract evidence-based claims from documents, enabling deterministic analysis for skill gaps, progression tracking, and multi-context value alignment.
+- Engineered a structured extraction pipeline utilizing LLM and OCR to parse documents into traceable, confidence-scored claims with full source provenance for semantic classification.
+- Implemented a hybrid RAG architecture (FAISS, BM25, cross-encoder reranking, Langchain) with MD5-based caching to achieve sub-second Q&A over extracted claims, reducing processing latency by ~50%.
+- **GitHub**: https://github.com/Anmolbaral/DocsRAG
+
+### TechBridge Learning
+**Duration**: Aug 2024 - Present
+- Built a full-stack privacy-first AI Assistive Technology (AT) platform integrating over 68+ trusted data sources using OpenAI API embeddings, ensuring compliance (FERPA/COPPA) with no PII storage.
+- Engineered a high-performance ingest and semantic search mechanism; cleaned/chunked/vectorized content and tuned Pgvector IVFFlat for sub-200 ms query latency, directly supporting efficient data discovery.
+- Delivered role-based personalization using web front-end technologies like TypeScript and React to help with matching AT tools.
+- Shipped with high-quality standards, including 95%+ test coverage (Vitest, Playwright) and Vercel CI/CD integration.
+
+### AI Profile Builder
 - **Description**: End-to-end web app that transforms a PDF resume into structured JSON and concise, human-ready summaries.
 - **Technologies**: React, TypeScript, Node, OpenAI API, Prisma, PostgreSQL, Vite, GCP (Cloud Build), Docker.
 - **GitHub**: https://github.com/Anmolbaral/ProfileBuilder
 
-### Project 2: Earthquake Aftershock Prediction - Researched Based Project
+### Earthquake Aftershock Prediction - Researched Based Project
 - **Description**:  ETL and ML pipeline on USGS seismic data to classify mainshocks vs. aftershocks.
 - **Technologies**: SQL, Pandas, NumPy, scikit-learn, GeoPandas.
 - **Result**:Achieved ~83% accuracy with logistic regression/SVM; produced reproducible notebooks.

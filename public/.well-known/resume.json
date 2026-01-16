@@ -70,6 +70,30 @@
   },
   "projects": [
     {
+      "name": "DocsRAG",
+      "duration": "Feb 2025 - June 2025",
+      "description": "Career Intelligence Platform to extract evidence-based claims from documents, enabling deterministic analysis for skill gaps, progression tracking, and multi-context value alignment",
+      "highlights": [
+        "Engineered structured extraction pipeline utilizing LLM and OCR to parse documents into traceable, confidence-scored claims with full source provenance",
+        "Implemented hybrid RAG architecture (FAISS, BM25, cross-encoder reranking, Langchain) with MD5-based caching",
+        "Achieved sub-second Q&A over extracted claims, reducing processing latency by ~50%"
+      ],
+      "technologies": ["LLM", "OCR", "FAISS", "BM25", "Langchain", "RAG", "Python"],
+      "github": "https://github.com/Anmolbaral/DocsRAG"
+    },
+    {
+      "name": "TechBridge Learning",
+      "duration": "Aug 2024 - Present",
+      "description": "Full-stack privacy-first AI Assistive Technology (AT) platform integrating over 68+ trusted data sources using OpenAI API embeddings, ensuring compliance (FERPA/COPPA) with no PII storage",
+      "highlights": [
+        "Engineered high-performance ingest and semantic search mechanism; cleaned/chunked/vectorized content and tuned Pgvector IVFFlat for sub-200 ms query latency",
+        "Delivered role-based personalization using TypeScript and React for matching AT tools",
+        "Shipped with 95%+ test coverage (Vitest, Playwright) and Vercel CI/CD integration"
+      ],
+      "technologies": ["TypeScript", "React", "OpenAI API", "Pgvector", "PostgreSQL", "Vitest", "Playwright", "Vercel"],
+      "compliance": ["FERPA", "COPPA"]
+    },
+    {
       "name": "AI Profile Builder",
       "description": "End-to-end web app that transforms a PDF resume into structured JSON and concise, human-ready summaries",
       "technologies": ["React", "TypeScript", "Node", "OpenAI API", "Prisma", "PostgreSQL", "Vite", "GCP", "Docker"],
