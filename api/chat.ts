@@ -69,7 +69,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                           - If the answer cannot be reasonably derived from the context, say: "I don't have enough information to answer that question."
                           - NEVER invent details that are not supported by the context.
                           - Keep answers friendly, professional, and concise (2-5 sentences).
-                          - If asked for his resume, reply with exactly: https://yourvercelapp.vercel.app/AnmolBaruwal__Resume.pdf`;
+                          - If asked for his resume, reply with exactly: https://anmolbaruwal.vercel.app/AnmolBaruwal__Resume.pdf`;
     
     const context = load_context();
 
