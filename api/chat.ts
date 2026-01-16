@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import OpenAI from 'openai';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import { check_rate_limit } from './utils/rate-limit';
+import { check_rate_limit } from './utils/rate-limit.js';
 
 // Load context from file
 function load_context(): string {
