@@ -1,0 +1,151 @@
+# Anmol Website - Coding Standards & Guidelines
+
+## Project Overview
+Portfolio website with AI chatbot, hosted on Vercel with Supabase backend.
+
+## Tech Stack
+- **Frontend**: React 18, TypeScript, Vite, Tailwind CSS
+- **Backend**: Vercel Serverless Functions, TypeScript
+- **Database**: Supabase (PostgreSQL)
+- **AI**: OpenAI API (GPT-4)
+- **Deployment**: Vercel
+
+## Naming Conventions
+
+### Variables & Constants
+- Use **camelCase** for all variables and constants
+- Be descriptive but concise
+```typescript
+const userMessage = "Hello";
+const apiResponse = await fetch();
+const isLoading = false;
+```
+
+### Functions & Methods
+- Use **snake_case** for all function and method names
+- Use verb prefixes: get_, set_, create_, update_, delete_, handle_, fetch_
+```typescript
+function get_user_data() {}
+async function fetch_chat_response() {}
+const handle_submit = () => {}
+```
+
+### Files & Folders
+- **Components**: PascalCase (e.g., `ChatWindow.tsx`, `MessageBubble.tsx`)
+- **Utilities/Helpers**: kebab-case (e.g., `supabase-client.ts`, `api-helpers.ts`)
+- **API Routes**: kebab-case (e.g., `chat.ts`, `leave-note.ts`)
+
+### Types & Interfaces
+- Use PascalCase
+- Prefix interfaces with `I` only when necessary for clarity
+```typescript
+interface Message {}
+type ApiResponse = {}
+```
+
+## Code Structure
+
+### Function Comments
+- Add brief single-line comments for complex logic only
+- No redundant comments for self-explanatory code
+```typescript
+// Good
+function calculate_total_cost(items: Item[]) {
+  // Apply bulk discount for orders > 10 items
+  const discount = items.length > 10 ? 0.1 : 0;
+  return items.reduce((sum, item) => sum + item.price, 0) * (1 - discount);
+}
+
+// Bad - too verbose
+function get_name() {
+  // This function returns the name
+  // It gets the name from the variable
+  return name; // Return the name
+}
+```
+
+### File Organization
+```
+/frontend
+  /src
+    /components      # React components
+    /lib             # Utilities, helpers, clients
+    /types           # TypeScript type definitions
+    /hooks           # Custom React hooks
+    App.tsx
+    main.tsx
+
+/api                 # Vercel serverless functions
+  chat.ts
+  leave-note.ts
+  health.ts
+
+/lib                 # Shared utilities
+  supabase-client.ts
+  openai-client.ts
+
+/supabase
+  /migrations        # Database migrations
+```
+
+## Code Quality Rules
+
+### TypeScript
+- Always use TypeScript, no `any` types unless absolutely necessary
+- Define interfaces for all data structures
+- Use strict mode
+
+### React Best Practices
+- Use functional components with hooks
+- Extract reusable logic into custom hooks
+- Keep components under 250 lines
+- One component per file
+
+### API Design
+- RESTful conventions
+- Proper HTTP status codes (200, 400, 401, 500)
+- Consistent error response format
+```typescript
+{ error: string, details?: string }
+```
+
+### Error Handling
+- Always use try-catch for async operations
+- Log errors to console with context
+- Return user-friendly error messages
+
+### Performance
+- Implement rate limiting on API routes
+- Cache frequently accessed data
+- Use environment variables for secrets
+
+## File Removal Criteria
+Remove files that are:
+- Duplicates
+- Old build artifacts in src/
+- Unused dependencies
+- Legacy/deprecated code
+- Development-only files not in .gitignore
+
+## Dependencies
+- Keep dependencies minimal
+- Remove unused packages
+- Use exact versions in production
+
+## Environment Variables
+Required variables:
+```
+OPENAI_API_KEY
+SUPABASE_URL
+SUPABASE_ANON_KEY
+```
+
+## Git Practices
+- Clear, descriptive commit messages
+- No commits of .env files
+- Keep .gitignore updated
+
+## Testing (Future)
+- Unit tests for utilities
+- Integration tests for API routes
+- E2E tests for critical user flows

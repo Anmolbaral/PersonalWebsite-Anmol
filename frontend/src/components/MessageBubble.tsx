@@ -1,18 +1,13 @@
 import React from 'react';
-
-interface Message {
-  id: string;
-  text: string;
-  isUser: boolean;
-  timestamp: Date;
-}
+import type { Message } from '../types';
 
 interface MessageBubbleProps {
   message: Message;
 }
 
 const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
-  const formatTime = (date: Date) => {
+  // Format timestamp to readable time
+  const format_time = (date: Date) => {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
@@ -29,7 +24,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
           <p className="whitespace-pre-wrap">{message.text}</p>
         </div>
         <div className={`text-sm text-[var(--text-secondary)] mt-2 ${message.isUser ? 'text-right' : 'text-left'}`}>
-          {formatTime(message.timestamp)}
+          {format_time(message.timestamp)}
         </div>
       </div>
       {!message.isUser && (

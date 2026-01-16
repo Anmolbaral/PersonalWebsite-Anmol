@@ -1,13 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import MessageBubble from './MessageBubble.tsx';
+import MessageBubble from './MessageBubble';
 import LeaveNote from './LeaveNote';
-
-interface Message {
-  id: string;
-  text: string;
-  isUser: boolean;
-  timestamp: Date;
-}
+import type { Message } from '../types';
 
 interface ChatWindowProps {
   messages: Message[];
@@ -20,15 +14,17 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
   const [isLeaveNoteOpen, setIsLeaveNoteOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
+  // Auto-scroll to bottom when new messages arrive
+  const scroll_to_bottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
-    scrollToBottom();
+    scroll_to_bottom();
   }, [messages]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Handle chat form submission
+  const handle_submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (inputValue.trim() && !isLoading) {
       onSendMessage(inputValue.trim());
@@ -36,10 +32,11 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  // Handle Enter key to send message
+  const handle_key_press = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      handleSubmit(e);
+      handle_submit(e);
     }
   };
 
@@ -58,7 +55,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
           </div>
           <div className="flex pl-20 items-center space-x-4">
             <a
-              href="https://portfolio-backend-zytbdwhcgq-uc.a.run.app/api/resume"
+              href="/api/resume"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2"
@@ -172,12 +169,12 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
 
       {/* Input Area */}
       <div className="flex-shrink-0 p-6 border-t border-[var(--border-color)]">
-        <form onSubmit={handleSubmit} className="flex space-x-4">
+        <form onSubmit={handle_submit} className="flex space-x-4">
           <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyPress={handle_key_press}
             placeholder="Ask me about Anmol..."
             disabled={isLoading}
             className="flex-1 bg-[var(--input-bg)] text-[var(--text-primary)] placeholder-[var(--text-secondary)] border border-[var(--border-color)] rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm transition-all duration-200 text-base"

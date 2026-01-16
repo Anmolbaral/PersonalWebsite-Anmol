@@ -1,0 +1,98 @@
+{
+  "name": "Anmol Baruwal",
+  "headline": "Full-stack software engineer focused on AI systems, data infrastructure, and production software",
+  "location": "Nashville, Tennessee, United States",
+  "workAuthorization": "Authorized to work in the U.S.",
+  "yearsOfExperience": 3,
+  "skills": {
+    "languages": ["JavaScript", "TypeScript", "Python", "Java", "C++", "HTML", "CSS", "SQL"],
+    "frameworks": ["React", "Node.js", "Express.js", "Next.js", "FastAPI", "Django", "Flask"],
+    "data": ["PostgreSQL", "MongoDB", "MySQL", "ETL/ELT", "Data Modeling", "Analytics Pipelines"],
+    "cloud": ["AWS", "Google Cloud Platform", "Docker", "Kubernetes", "CI/CD", "Vercel", "Firebase"],
+    "ai_ml": ["TensorFlow", "PyTorch", "Applied ML", "LLMs", "System Evaluation"]
+  },
+  "experience": [
+    {
+      "company": "Five Fold University",
+      "role": "Full-Stack Developer",
+      "dates": "May 2025 - Present",
+      "location": "Nashville, TN",
+      "summary": "Built a comprehensive educational website, serving a global student body across 12+ countries with an integrated enrollment system. Implemented advanced LMS integration, managing course catalogs, academic programs, student records, and multi-role user authentication for international faculty and staff. Developed responsive UI/UX design, SEO strategies, and Google Analytics integration to track performance across different platforms. Collaborated with international stakeholders to deploy multi-language contact systems, automated inquiry routing, and scalable database architecture supporting complex educational operations."
+    },
+    {
+      "company": "Maroon",
+      "role": "Software Developer Intern",
+      "dates": "June 2025 - Present",
+      "location": "Nashville, Tennessee (Remote)",
+      "summary": "Built a real-time notifications pipeline for Android/iOS using Python (FastAPI) on AWS (SNS, Lambda, DynamoDB). Wrote backend APIs, automation tests, and developer docs; integrated the suite into CI/CD to improve reliability and iteration speed."
+    },
+    {
+      "company": "Apple",
+      "role": "Engineering Intern (AirPods)",
+      "dates": "May 2024 to Aug 2024",
+      "location": "San Diego, California (Onsite)",
+      "summary": "Shipped a cross-stack, customer-facing firmware feature with iOS, firmware, and QA partners; ensured backward compatibility. Identified and helped resolve a CI/CD bottleneck affecting 200+ engineers; coordinated updates across multiple teams."
+    },
+    {
+      "company": "Vanderbilt University IT",
+      "role": "Software Engineering Intern",
+      "dates": "Jan 2025 to April 2025",
+      "location": "Nashville, TN (Hybrid)",
+      "summary": "Automated incident management by integrating TDX, Statuspage, and Microsoft Teams APIs; reduced manual effort ~30%. Built a REST service for ticket deduplication and dynamic component mapping to keep Statuspage in sync."
+    },
+    {
+      "company": "Vanderbilt University IT",
+      "role": "Web Development Intern",
+      "dates": "Jan 2024 to Apr 2024",
+      "location": "Nashville, TN (Hybrid)",
+      "summary": "Revamped Vanderbilt's IT website with HTML, CSS, and JavaScript to meet WCAG standards and enhance accessibility. Modernized the UI using Figma and responsive design. Developed secure self-service tools that boosted user engagement by 30%."
+    },
+    {
+      "company": "Tufts University",
+      "role": "Embedded Software Engineer (Intern)",
+      "dates": "Jun 2021 to Aug 2021",
+      "location": "Medford, MA (On-site)",
+      "summary": "Built a Smart Motor, a pre-programmed trainable motor that can be trained to respond to sensor inputs using a Wio Terminal board and its in-built 2.4\" display for graphical representation of sensor data. Designed an Engineering activity named Wio with Story as an approach to integrate engineering with literacy. Researched and documented the complete setup for the Arduino CLI to build applications around the Arduino ecosystem in different Operating Systems and supported platforms."
+    },
+    {
+      "company": "Karkhana",
+      "role": "Content Designer (STEM/Robotics)",
+      "dates": "Jul 2019 to Jun 2021",
+      "location": "Kathmandu, Nepal (On-site)",
+      "summary": "Designed robotics content for middle-school kids that focused on the hands-on learning process using various multipurpose 3D printed and laser-cut models and instruction sheets through multiple iterations. Led a maker space in events like National STEAM Challenge and Global Children's Designathon involving more than 200 students by contributing to their ideation and execution process."
+    }
+  ],
+  "education": {
+    "degree": "B.S. Computer Science",
+    "institution": "Fisk University",
+    "graduationYear": 2025,
+    "gpa": 3.85
+  },
+  "projects": [
+    {
+      "name": "AI Profile Builder",
+      "description": "End-to-end web app that transforms a PDF resume into structured JSON and concise, human-ready summaries",
+      "technologies": ["React", "TypeScript", "Node", "OpenAI API", "Prisma", "PostgreSQL", "Vite", "GCP", "Docker"],
+      "github": "https://github.com/Anmolbaral/ProfileBuilder"
+    },
+    {
+      "name": "Earthquake Aftershock Prediction",
+      "description": "ETL and ML pipeline on USGS seismic data to classify mainshocks vs. aftershocks",
+      "technologies": ["SQL", "Pandas", "NumPy", "scikit-learn", "GeoPandas"],
+      "result": "Achieved ~83% accuracy with logistic regression/SVM; produced reproducible notebooks"
+    }
+  ],
+  "interests": [
+    "Human-centered AI tools",
+    "Health tech data pipelines",
+    "Tinkering with sensors and microcontrollers",
+    "Design systems"
+  ],
+  "links": {
+    "website": "https://yourdomain.com",
+    "github": "https://github.com/Anmolbaral",
+    "linkedin": "https://www.linkedin.com/in/anmol-baruwal-288607178/",
+    "resume_pdf": "https://yourdomain.com/AnmolBaruwal__Resume.pdf"
+  },
+  "lastUpdated": "2026-01-16"
+}

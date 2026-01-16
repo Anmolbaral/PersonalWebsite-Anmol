@@ -1,189 +1,172 @@
-# Anmol Baruwal's AI Portfolio Chatbot
+# Anmol Baruwal - AI-Powered Portfolio Website
 
-A beautiful, minimalist portfolio website featuring an AI-powered chatbot that answers questions about Anmol Baruwal's experience, skills, and projects. Built with React, TypeScript, Node.js, and OpenAI.
+Modern portfolio website with AI chatbot assistant, built with React and deployed on Vercel + Supabase.
 
-## Features
+## ✨ Features
 
-- **AI-Powered Chatbot**: Intelligent responses about Anmol's background using OpenAI
-- **Glassmorphism UI**: Modern, translucent design with animated gradients
-- **Theme Toggle**: Switch between dark and light themes
-- **Responsive Design**: Works perfectly on all devices
-- **Real-time Chat**: Instant responses with typing indicators
-- **Secure API**: Backend with proper error handling and validation
+- 🤖 AI Chatbot - Answers questions about experience, skills, and projects
+- 📝 Contact Form - Visitors can leave notes stored in Supabase
+- 🎨 Dark/Light Theme - Theme toggle with smooth transitions
+- 📱 Responsive Design - Works on all devices
+- ⚡ Serverless Architecture - Fast and scalable on Vercel
+- 🔒 Rate Limited - Protection against abuse
+- 💰 Free Hosting - Runs on free tiers
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-### Frontend
-- **React 18** with TypeScript
-- **Vite** for fast development
-- **Tailwind CSS** for styling
-- **Axios** for API communication
+**Frontend**: React 18, TypeScript, Vite, Tailwind CSS  
+**Backend**: Vercel Serverless Functions, OpenAI GPT-4 Mini  
+**Database**: Supabase (PostgreSQL)  
+**Infrastructure**: Vercel, Supabase, GitHub
 
-### Backend
-- **Node.js** with Express
-- **TypeScript** for type safety
-- **OpenAI API** for AI responses
-- **CORS** enabled for cross-origin requests
-
-## Quick Start
-
-### Prerequisites
-- Node.js (v16 or higher)
-- npm or yarn
-- OpenAI API key
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd portfolio-chatbot
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm run install:all
-   ```
-
-3. **Set up environment variables**
-   ```bash
-   cd backend
-   cp env.example .env
-   ```
-   
-   Edit `.env` and add your OpenAI API key:
-   ```env
-   OPENAI_API_KEY=your_openai_api_key_here
-   PORT=3001
-   ```
-
-4. **Update personal information**
-   Edit `backend/context.md` with your actual information, experience, and projects.
-
-5. **Start development servers**
-   ```bash
-   npm run dev
-   ```
-
-   This will start both frontend (port 5173) and backend (port 3001) servers.
-
-## Project Structure
+## 📁 Project Structure
 
 ```
-portfolio-chatbot/
-├── frontend/                 # React frontend application
+AnmolWebsite/
+├── api/                      # Vercel serverless functions
+│   ├── chat.ts              # AI chatbot endpoint
+│   ├── leave-note.ts        # Note submission
+│   ├── resume.ts            # Resume redirect
+│   └── health.ts            # Health check
+├── frontend/
 │   ├── src/
 │   │   ├── components/      # React components
-│   │   │   ├── ChatWindow.tsx
-│   │   │   ├── MessageBubble.tsx
-│   │   │   ├── StatusBar.tsx
-│   │   │   └── ThemeToggle.tsx
-│   │   ├── App.tsx         # Main application component
-│   │   └── index.css       # Global styles with glassmorphism
-│   └── package.json
-├── backend/                  # Node.js backend API
-│   ├── src/
-│   │   └── index.ts        # Express server with OpenAI integration
+│   │   ├── lib/            # Utilities
+│   │   └── types/          # TypeScript definitions
+│   └── public/             # Static assets
+├── public/                  # Shared assets
 │   ├── context.md          # AI knowledge base
-│   └── package.json
-├── package.json             # Monorepo configuration
-└── README.md
+│   └── AnmolBaruwal__Resume.pdf
+├── supabase/
+│   └── migrations/         # Database migrations
+└── vercel.json             # Vercel configuration
 ```
 
-## Design System
+## 🚀 Getting Started
 
-The application uses a custom glassmorphism design system with:
+### Prerequisites
 
-- **CSS Variables**: Theme-aware colors and properties
-- **Animated Gradients**: Smooth background animations
-- **Backdrop Blur**: Modern translucent effects
-- **Custom Scrollbars**: Styled scrollbars for better UX
-- **Responsive Layout**: Mobile-first design approach
+- Node.js 18+ and npm
+- OpenAI API key
+- Supabase account
+- Vercel account
 
-## AI Integration
+### Local Development
 
-The chatbot uses OpenAI's GPT-3.5-turbo model with:
+1. **Clone and install**
+```bash
+git clone <your-repo-url>
+cd AnmolWebsite
+npm install
+cd frontend && npm install
+```
 
-- **Context Injection**: Personal information from `context.md`
-- **System Prompt**: Defines the AI's persona and behavior
-- **Error Handling**: Graceful fallbacks for API issues
-- **Response Limiting**: Controlled token usage for cost management
+2. **Set up environment variables**
 
-## Customization
+Create `.env` in root:
+```env
+OPENAI_API_KEY=your_openai_api_key
+SUPABASE_URL=your_supabase_url
+SUPABASE_SERVICE_KEY=your_supabase_service_key
+```
 
-### Updating Personal Information
-Edit `backend/context.md` with your:
-- Personal details
-- Work experience
-- Skills and technologies
-- Projects and achievements
-- Education and certifications
+3. **Set up Supabase**
 
-### Styling Changes
-Modify `frontend/src/index.css` to customize:
-- Color schemes
-- Animations
-- Glassmorphism effects
-- Typography
+- Create Supabase project
+- Run migration in `/supabase/migrations/001_create_notes_table.sql`
 
-### API Configuration
-Adjust `backend/src/index.ts` for:
-- Different OpenAI models
-- Response parameters
-- Error handling logic
-
-## Deployment
-
-### Frontend (Vercel/Netlify)
+4. **Run dev server**
 ```bash
 cd frontend
-npm run build
-# Deploy the dist folder
+npm run dev
 ```
 
-### Backend (Railway/Render)
+Visit `http://localhost:5173`
+
+## 📦 Deployment
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete instructions.
+
+Quick deploy:
 ```bash
-cd backend
-npm run build
-# Deploy with environment variables
+git add .
+git commit -m "Deploy to Vercel"
+git push
+
+# Import in Vercel dashboard
+# Add environment variables
+# Deploy!
 ```
 
-## Development Scripts
+## 🎯 Coding Standards
+
+Defined in `.cursorrules`:
+
+- **Variables**: camelCase (`userMessage`, `isLoading`)
+- **Functions**: snake_case (`send_message()`, `handle_submit()`)
+- **Components**: PascalCase (`ChatWindow.tsx`)
+- **Types**: PascalCase
+- Brief, meaningful comments only
+
+## 🔧 Configuration
+
+**Rate Limiting**:
+- Chat API: 5 requests per 5 minutes per IP
+- Leave Note: 1 submission per 10 minutes per IP
+
+**AI Context**: Edit `/public/context.md` to update knowledge base
+
+## 📊 Features
+
+**AI Chatbot** (`/api/chat.ts`):
+- Powered by OpenAI GPT-4-mini
+- Reads from `context.md`
+- Rate limited, 500 token limit per response
+
+**Note Submission** (`/api/leave-note.ts`):
+- Stores in Supabase
+- Captures: name, email, message, optional contact info
+- Rate limited (1 per 10 minutes)
+
+## 🔒 Security
+
+- Environment variables for secrets
+- Rate limiting on all endpoints
+- Input validation on forms
+- Service key used only server-side
+
+## 📈 Monitoring
+
+**Vercel**: Function logs in deployment dashboard  
+**Supabase**: Table Editor to view notes, logs for queries  
+**OpenAI**: Track usage at platform.openai.com
+
+## 🧪 Testing
 
 ```bash
-# Run both frontend and backend
+cd frontend
 npm run dev
 
-# Run only frontend
-npm run dev:frontend
-
-# Run only backend
-npm run dev:backend
-
-# Build both applications
-npm run build
-
-# Install all dependencies
-npm run install:all
+# Test API endpoints (install Vercel CLI)
+vercel dev
 ```
 
-## Contributing
+Test endpoints:
+- `http://localhost:3000/api/health`
+- `http://localhost:3000/api/chat` (POST)
+- `http://localhost:3000/api/leave-note` (POST)
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+## 📝 License
 
-## License
+MIT License - feel free to use as a template for your portfolio!
 
-This project is licensed under the MIT License.
-
-## Author
+## 🙋‍♂️ Contact
 
 **Anmol Baruwal**
-- https://anmol-5831c.web.app/
+- Email: Anmolbaruwal01@gmail.com
+- LinkedIn: [linkedin.com/in/anmol-baruwal-288607178](https://www.linkedin.com/in/anmol-baruwal-288607178/)
+- GitHub: [@Anmolbaral](https://github.com/Anmolbaral)
 
 ---
 
-*Built with modern web technologies*
+Built with ❤️ by Anmol Baruwal

@@ -3,13 +3,7 @@ import axios from 'axios';
 import ChatWindow from './components/ChatWindow';
 import ThemeToggle from './components/ThemeToggle';
 import StatusBar from './components/StatusBar';
-
-interface Message {
-  id: string;
-  text: string;
-  isUser: boolean;
-  timestamp: Date;
-}
+import type { Message } from './types';
 
 function App() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -17,7 +11,7 @@ function App() {
   const [isDark, setIsDark] = useState(true);
   const [isConnected, setIsConnected] = useState(true);
 
-  // Load theme preference from localStorage
+  // Load theme preference on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
@@ -26,7 +20,8 @@ function App() {
     }
   }, []);
 
-  const toggleTheme = () => {
+  // Toggle between dark and light themes
+  const toggle_theme = () => {
     const newTheme = !isDark;
     setIsDark(newTheme);
     
@@ -39,7 +34,8 @@ function App() {
     }
   };
 
-  const sendMessage = async (text: string) => {
+  // Send message to AI chatbot API
+  const send_message = async (text: string) => {
     const userMessage: Message = {
       id: Date.now().toString(),
       text,
@@ -51,7 +47,7 @@ function App() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('https://portfolio-backend-zytbdwhcgq-uc.a.run.app/api/chat', {
+      const response = await axios.post('/api/chat', {
         message: text,
       });
 
@@ -86,9 +82,9 @@ function App() {
       <ChatWindow
         messages={messages}
         isLoading={isLoading}
-        onSendMessage={sendMessage}
+        onSendMessage={send_message}
       />
-      <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
+      <ThemeToggle isDark={isDark} onToggle={toggle_theme} />
       <StatusBar 
         isConnected={isConnected} 
         status={isConnected ? "Connected" : "Disconnected"}

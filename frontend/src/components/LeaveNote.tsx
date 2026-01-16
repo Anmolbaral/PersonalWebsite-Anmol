@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import type { NoteSubmission } from '../types';
 
 interface LeaveNoteProps {
   isOpen: boolean;
@@ -6,7 +7,7 @@ interface LeaveNoteProps {
 }
 
 const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose }) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<NoteSubmission>({
     name: '',
     email: '',
     message: '',
@@ -15,12 +16,13 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Submit note form to API
+  const handle_submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('https://portfolio-backend-zytbdwhcgq-uc.a.run.app/api/leave-note', {
+      const response = await fetch('/api/leave-note', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +37,7 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose }) => {
         setIsSubmitted(true);
         setFormData({ name: '', email: '', message: '', contactInfo: '' });
         
-        // Auto-close after 3 seconds
+        // Auto-close modal after success
         setTimeout(() => {
           setIsSubmitted(false);
           onClose();
@@ -50,7 +52,8 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  // Update form field values
+  const handle_change = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -86,7 +89,7 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose }) => {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handle_submit} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-[var(--text-primary)] mb-2">
                   Name *
@@ -96,7 +99,7 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose }) => {
                   id="name"
                   name="name"
                   value={formData.name}
-                  onChange={handleChange}
+                  onChange={handle_change}
                   required
                   className="w-full bg-[var(--input-bg)] text-[var(--text-primary)] placeholder-[var(--text-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm transition-all duration-200"
                   placeholder="Your name"
@@ -112,7 +115,7 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose }) => {
                   id="email"
                   name="email"
                   value={formData.email}
-                  onChange={handleChange}
+                  onChange={handle_change}
                   required
                   className="w-full bg-[var(--input-bg)] text-[var(--text-primary)] placeholder-[var(--text-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm transition-all duration-200"
                   placeholder="your.email@example.com"
@@ -127,7 +130,7 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose }) => {
                   id="message"
                   name="message"
                   value={formData.message}
-                  onChange={handleChange}
+                  onChange={handle_change}
                   required
                   rows={4}
                   className="w-full bg-[var(--input-bg)] text-[var(--text-primary)] placeholder-[var(--text-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm transition-all duration-200 resize-none"
@@ -143,8 +146,8 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose }) => {
                   type="text"
                   id="contactInfo"
                   name="contactInfo"
-                  value={formData.contactInfo}
-                  onChange={handleChange}
+                  value={formData.contactInfo || ''}
+                  onChange={handle_change}
                   className="w-full bg-[var(--input-bg)] text-[var(--text-primary)] placeholder-[var(--text-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm transition-all duration-200"
                   placeholder="Phone, LinkedIn, etc. (optional)"
                 />

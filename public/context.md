@@ -46,6 +46,14 @@ Full-stack software engineer who’s shipped cross-system features at Apple, aut
 
 ## Work Experience
 
+### Five Fold University — Full-Stack Developer
+**Duration**: May 2025 – Present
+**Location**: Nashville, TN
+- Built a comprehensive educational website, serving a global student body across 12+ countries with an integrated enrollment system.
+- Implemented advanced LMS integration, managing course catalogs, academic programs, student records, and multi-role user authentication for international faculty and staff.
+- Developed responsive UI/UX design, SEO strategies, and Google Analytics integration to track performance across different platforms.
+- Collaborated with international stakeholders to deploy multi-language contact systems, automated inquiry routing, and scalable database architecture supporting complex educational operations.
+
 ### Maroon — Software Developer Intern
 **Duration**: June 2025 – Present
 **Location**: Nashville, Tennessee (Remote)
