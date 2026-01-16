@@ -6,7 +6,7 @@
 - **Email**: Anmolbaruwal01@gmail.com
 - **LinkedIn**: https://www.linkedin.com/in/anmol-baruwal-288607178/
 - **GitHub**: https://github.com/Anmolbaral
-- **Resume**: Available at http://localhost:3001/api/resume (PDF format)
+- **Resume**: Available at https://anmolbaruwal.vercel.app/AnmolBaruwal__Resume.pdf (PDF format)
 
 ## Professional Summary
 Full-stack software engineer who’s shipped cross-system features at Apple, automated real-time workflows at Vanderbilt, and currently owns backend and test automation for a mobile startup. Strong in Python and TypeScript across React/Next.js and Node/FastAPI, with hands-on experience in AWS/GCP, SQL/NoSQL, and building reliable data pipelines and user-friendly apps.
