@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Analytics } from '@vercel/analytics/react';
 import ChatWindow from './components/ChatWindow';
 import ThemeToggle from './components/ThemeToggle';
 import StatusBar from './components/StatusBar';
@@ -91,7 +90,6 @@ function App() {
         status={isConnected ? "Connected" : "Disconnected"}
         liveStatus="📍 Nashville, TN | 🚀 Open to new opportunities"
       />
-      <Analytics />
     </div>
   );
 }

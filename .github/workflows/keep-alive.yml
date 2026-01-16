@@ -1,0 +1,18 @@
+name: Keep Vercel Alive
+
+on:
+  schedule:
+    # Run every 6 hours to keep the site active (prevents 7-day sleep)
+    # Format: minute hour day month weekday
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Health Endpoint
+        run: |
+          echo "Pinging Vercel health endpoint..."
+          curl -f "${{ secrets.VERCEL_URL || 'https://anmolbaruwal.vercel.app/' }}/api/health" || exit 1
+          echo "✅ Keep-alive ping successful!"
