@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import type { NoteSubmission } from '../types';
 
 interface LeaveNoteProps {
   isOpen: boolean;
   onClose: () => void;
+  triggerButtonRef?: React.RefObject<HTMLButtonElement>;
 }
 
-const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose }) => {
+const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose, triggerButtonRef }) => {
   const [formData, setFormData] = useState<NoteSubmission>({
     name: '',
     email: '',
@@ -15,6 +16,9 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const firstFocusableRef = useRef<HTMLButtonElement>(null);
+  const lastFocusableRef = useRef<HTMLButtonElement>(null);
 
   // Submit note form to API
   const handle_submit = async (e: React.FormEvent) => {
@@ -60,15 +64,85 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose }) => {
     });
   };
 
+  // Handle ESC key to close modal
+  const handle_key_down = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape' && !isSubmitting) {
+      onClose();
+    }
+  };
+
+  // Focus trap: Keep focus within modal
+  const handle_tab_key = (e: React.KeyboardEvent) => {
+    if (e.key !== 'Tab') return;
+
+    const focusableElements = modalRef.current?.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    
+    if (!focusableElements || focusableElements.length === 0) return;
+
+    const firstElement = focusableElements[0] as HTMLElement;
+    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+    if (e.shiftKey) {
+      // Shift + Tab
+      if (document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement.focus();
+      }
+    } else {
+      // Tab
+      if (document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
+      }
+    }
+  };
+
+  // Focus management: Focus first element when modal opens, return focus when closes
+  useEffect(() => {
+    if (isOpen) {
+      // Focus first focusable element when modal opens
+      setTimeout(() => {
+        firstFocusableRef.current?.focus();
+      }, 100);
+    } else {
+      // Return focus to trigger button when modal closes
+      triggerButtonRef?.current?.focus();
+    }
+  }, [isOpen, triggerButtonRef]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-[var(--chat-bg)] backdrop-blur-xl border border-[var(--border-color)] rounded-2xl shadow-2xl w-full max-w-md p-6 relative">
+    <div 
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+      onClick={(e) => {
+        // Close modal when clicking backdrop
+        if (e.target === e.currentTarget && !isSubmitting) {
+          onClose();
+        }
+      }}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
+    >
+      <div 
+        ref={modalRef}
+        className="bg-[var(--chat-bg)] backdrop-blur-xl border border-[var(--border-color)] rounded-2xl shadow-2xl w-full max-w-md p-6 relative"
+        onKeyDown={(e) => {
+          handle_key_down(e);
+          handle_tab_key(e);
+        }}
+      >
         {/* Close button */}
         <button
+          ref={firstFocusableRef}
           onClick={onClose}
-          className="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+          disabled={isSubmitting}
+          aria-label="Close dialog"
+          className="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -84,8 +158,8 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose }) => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                 </svg>
               </div>
-              <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Leave a Note</h2>
-              <p className="text-sm text-[var(--text-secondary)]">Share your thoughts or get in touch!</p>
+              <h2 id="modal-title" className="text-xl font-semibold text-[var(--text-primary)] mb-2">Leave a Note</h2>
+              <p id="modal-description" className="text-sm text-[var(--text-secondary)]">Share your thoughts or get in touch!</p>
             </div>
 
             {/* Form */}
@@ -154,9 +228,10 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose }) => {
               </div>
 
               <button
+                ref={lastFocusableRef}
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
                 {isSubmitting ? (
                   <>

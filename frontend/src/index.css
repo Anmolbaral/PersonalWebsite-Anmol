@@ -17,6 +17,10 @@
     --user-bubble-text: white;
     --status-border: #374151;
     --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --code-bg: rgba(59, 130, 246, 0.15);
+    --code-text: #1e40af;
+    --link-color: #2563eb;
+    --link-hover: #1d4ed8;
 }
 
 .light-theme {
@@ -32,6 +36,10 @@
     --ai-bubble-text: #1e293b;
     --status-border: #e5e7eb;
     --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    --code-bg: rgba(59, 130, 246, 0.2);
+    --code-text: #1e40af;
+    --link-color: #2563eb;
+    --link-hover: #1d4ed8;
 }
 
 body {

@@ -14,7 +14,11 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
   };
 
   return (
-    <div className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}>
+    <div 
+      className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
+      role="article"
+      aria-label={message.isUser ? "Your message" : "AI assistant message"}
+    >
       <div className={`max-w-3xl ${message.isUser ? 'order-2' : 'order-1'}`}>
         <div
           className={`p-5 rounded-2xl shadow-sm text-base ${
@@ -30,25 +34,25 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  h1: ({...props}) => <h1 className="text-2xl font-bold text-[var(--text-primary)] mt-4 mb-2" {...props} />,
-                  h2: ({...props}) => <h2 className="text-xl font-semibold text-[var(--text-primary)] mt-4 mb-2 flex items-center gap-2" {...props} />,
-                  h3: ({...props}) => <h3 className="text-lg font-semibold text-[var(--text-primary)] mt-3 mb-2" {...props} />,
-                  p: ({...props}) => <p className="text-[var(--text-primary)] leading-relaxed my-2" {...props} />,
-                  ul: ({...props}) => <ul className="list-disc list-inside text-[var(--text-primary)] my-3 space-y-1.5 ml-2" {...props} />,
-                  ol: ({...props}) => <ol className="list-decimal list-inside text-[var(--text-primary)] my-3 space-y-1.5 ml-2" {...props} />,
-                  li: ({...props}) => <li className="text-[var(--text-primary)] ml-2" {...props} />,
-                  strong: ({...props}) => <strong className="font-semibold text-[var(--text-primary)]" {...props} />,
-                  em: ({...props}) => <em className="italic text-[var(--text-primary)]" {...props} />,
+                  h1: ({...props}) => <h1 className="text-2xl font-bold text-[var(--ai-bubble-text)] mt-4 mb-2" {...props} />,
+                  h2: ({...props}) => <h2 className="text-xl font-semibold text-[var(--ai-bubble-text)] mt-4 mb-2 flex items-center gap-2" {...props} />,
+                  h3: ({...props}) => <h3 className="text-lg font-semibold text-[var(--ai-bubble-text)] mt-3 mb-2" {...props} />,
+                  p: ({...props}) => <p className="text-[var(--ai-bubble-text)] leading-relaxed my-2" {...props} />,
+                  ul: ({...props}) => <ul className="list-disc list-inside text-[var(--ai-bubble-text)] my-3 space-y-1.5 ml-2" {...props} />,
+                  ol: ({...props}) => <ol className="list-decimal list-inside text-[var(--ai-bubble-text)] my-3 space-y-1.5 ml-2" {...props} />,
+                  li: ({...props}) => <li className="text-[var(--ai-bubble-text)] ml-2" {...props} />,
+                  strong: ({...props}) => <strong className="font-semibold text-[var(--ai-bubble-text)]" {...props} />,
+                  em: ({...props}) => <em className="italic text-[var(--ai-bubble-text)]" {...props} />,
                   code: ({inline, className, children, ...props}: any) => {
                     if (inline) {
                       return (
-                        <code className="bg-blue-500/20 text-blue-300 px-1.5 py-0.5 rounded text-sm font-mono" {...props}>
+                        <code className="bg-[var(--code-bg)] text-[var(--code-text)] px-1.5 py-0.5 rounded text-sm font-mono" {...props}>
                           {children}
                         </code>
                       );
                     }
                     return (
-                      <code className="text-sm font-mono" {...props}>
+                      <code className="text-sm font-mono text-[var(--ai-bubble-text)]" {...props}>
                         {children}
                       </code>
                     );
@@ -58,9 +62,9 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
                       {children}
                     </pre>
                   ),
-                  blockquote: ({...props}) => <blockquote className="border-l-4 border-blue-500 pl-4 italic text-[var(--text-secondary)] my-3" {...props} />,
-                  a: ({...props}) => <a className="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer" {...props} />,
-                  hr: ({...props}) => <hr className="border-[var(--border-color)] my-4" {...props} />,
+                  blockquote: ({...props}) => <blockquote className="border-l-4 border-blue-500 pl-4 italic text-[var(--ai-bubble-text)] opacity-80 my-3" {...props} />,
+                  a: ({...props}) => <a className="text-[var(--link-color)] hover:text-[var(--link-hover)] underline" target="_blank" rel="noopener noreferrer" {...props} />,
+                  hr: ({...props}) => <hr className="border-gray-400 my-4" {...props} />,
                 }}
               >
                 {message.text}

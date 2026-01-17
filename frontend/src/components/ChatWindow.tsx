@@ -13,6 +13,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
   const [inputValue, setInputValue] = useState('');
   const [isLeaveNoteOpen, setIsLeaveNoteOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const leaveNoteButtonRef = useRef<HTMLButtonElement>(null);
 
   // Auto-scroll to bottom when new messages arrive
   const scroll_to_bottom = () => {
@@ -58,7 +59,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
               href="/api/resume"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2"
+              className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -66,8 +67,9 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
               <span>Resume</span>
             </a>
             <button
+              ref={leaveNoteButtonRef}
               onClick={() => setIsLeaveNoteOpen(true)}
-              className="bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2"
+              className="bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -106,7 +108,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
             <div className="flex flex-wrap justify-center gap-4">
               <button
                 onClick={() => onSendMessage("Tell me about your latest project")}
-                className="bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2"
+                className="bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -115,7 +117,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
               </button>
               <button
                 onClick={() => onSendMessage("Tell me about your latest work experience")}
-                className="bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2"
+                className="bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6" />
@@ -124,7 +126,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
               </button>
               <button
                 onClick={() => onSendMessage("What are your skills?")}
-                className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -133,7 +135,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
               </button>
               <button
                 onClick={() => onSendMessage("Tell me about your education")}
-                className="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2"
+                className="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -143,7 +145,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
               </button>
               <button
                 onClick={() => setIsLeaveNoteOpen(true)}
-                className="bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2"
+                className="bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white px-5 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -182,7 +184,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
           <button
             type="submit"
             disabled={isLoading || !inputValue.trim()}
-            className="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-500 disabled:cursor-not-allowed text-white px-7 py-4 rounded-xl font-medium transition-all duration-200 flex items-center space-x-2 text-base"
+            className="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-500 disabled:cursor-not-allowed text-white px-7 py-4 rounded-xl font-medium transition-all duration-200 flex items-center space-x-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             <span>Send</span>
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -196,7 +198,8 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
       {/* Leave Note Modal */}
       <LeaveNote 
         isOpen={isLeaveNoteOpen} 
-        onClose={() => setIsLeaveNoteOpen(false)} 
+        onClose={() => setIsLeaveNoteOpen(false)}
+        triggerButtonRef={leaveNoteButtonRef}
       />
     </div>
   );
