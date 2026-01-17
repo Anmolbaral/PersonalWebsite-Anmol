@@ -31,7 +31,10 @@ npm-debug.log*
 
 # Temporary files
 *.tmp
+*.pid
 .cache/
+node_modules.old/
+backend/
 
 # Firebase
 .firebase/

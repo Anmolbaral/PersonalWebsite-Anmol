@@ -69,7 +69,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                           - If the answer cannot be reasonably derived from the context, say: "I don't have enough information to answer that question."
                           - NEVER invent details that are not supported by the context.
                           - Keep answers friendly, professional, and concise (2-5 sentences).
-                          - If asked for his resume, reply with exactly: https://anmolbaruwal.vercel.app/AnmolBaruwal__Resume.pdf`;
+                          - If asked for his resume, reply with exactly: https://anmolbaruwal.vercel.app/AnmolBaruwal__Resume.pdf
+                          
+                          FORMATTING GUIDELINES:
+                          - Use rich markdown formatting to make responses visually appealing and easy to read.
+                          - For projects: Use ## for project name, bullet points with - for features, **bold** for key terms, and emoji where appropriate (🚀 for projects, ⚡ for tech, 🎯 for achievements).
+                          - For work experience: Use ## for company name, **bold** for role and duration, bullet points for achievements.
+                          - Use code blocks with language tags for technical details when relevant.
+                          - Structure information with clear headings, lists, and emphasis.
+                          - Make responses engaging and scannable with proper spacing and formatting.`;
     
     const context = load_context();
 
@@ -85,8 +93,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           content: `CONTEXT: ###\n${context}\n###\n\nQUESTION: "${message}"`
         }
       ],
-      max_tokens: 500,
-      temperature: 0.2,
+      max_tokens: 800,
+      temperature: 0.3,
     });
 
     const response = completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
