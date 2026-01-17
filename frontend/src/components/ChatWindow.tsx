@@ -16,12 +16,21 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
   const leaveNoteButtonRef = useRef<HTMLButtonElement>(null);
 
   // Auto-scroll to bottom when new messages arrive
+  // Debounced to avoid excessive scrolling during streaming
   const scroll_to_bottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
-    scroll_to_bottom();
+    // Only scroll if there are messages
+    if (messages.length > 0) {
+      // Use requestAnimationFrame for better performance
+      const timeoutId = setTimeout(() => {
+        scroll_to_bottom();
+      }, 100); // Small delay to batch rapid updates during streaming
+      
+      return () => clearTimeout(timeoutId);
+    }
   }, [messages]);
 
   // Handle chat form submission

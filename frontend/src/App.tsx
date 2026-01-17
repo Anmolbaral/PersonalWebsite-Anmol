@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import ChatWindow from './components/ChatWindow';
 import ThemeToggle from './components/ThemeToggle';
 import StatusBar from './components/StatusBar';
@@ -34,10 +33,15 @@ function App() {
     }
   };
 
-  // Send message to AI chatbot API
+  // Send message to AI chatbot API with streaming support
   const send_message = async (text: string) => {
+    // Generate unique IDs to prevent collisions
+    const timestamp = Date.now();
+    const userMessageId = `${timestamp}-${Math.random().toString(36).substr(2, 9)}`;
+    const aiMessageId = `${timestamp + 1}-${Math.random().toString(36).substr(2, 9)}`;
+    
     const userMessage: Message = {
-      id: Date.now().toString(),
+      id: userMessageId,
       text,
       isUser: true,
       timestamp: new Date(),
@@ -46,34 +50,144 @@ function App() {
     setMessages(prev => [...prev, userMessage]);
     setIsLoading(true);
 
+    // Create AI message placeholder for streaming
+    const aiMessage: Message = {
+      id: aiMessageId,
+      text: '',
+      isUser: false,
+      timestamp: new Date(),
+    };
+
+    setMessages(prev => [...prev, aiMessage]);
+
+    // Create AbortController for timeout handling
+    const controller = new AbortController();
+    let timeoutId: NodeJS.Timeout | null = setTimeout(() => controller.abort(), 65000); // 65 seconds
+    let reader: ReadableStreamDefaultReader<Uint8Array> | null = null;
+
     try {
-      const response = await axios.post('/api/chat', {
-        message: text,
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: text }),
+        signal: controller.signal,
       });
 
-      const aiMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: response.data.response,
-        isUser: false,
-        timestamp: new Date(),
-      };
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
 
-      setMessages(prev => [...prev, aiMessage]);
+      if (!response.ok) {
+        if (response.status === 429) {
+          throw new Error('Too many requests. Please wait a moment and try again.');
+        } else if (response.status === 500) {
+          throw new Error('Server error. Please try again later.');
+        } else {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+      }
+
+      if (!response.body) {
+        throw new Error('Response body is null');
+      }
+
+      reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+      let streamDone = false;
+
       setIsConnected(true);
+
+      while (!streamDone) {
+        const { done, value } = await reader.read();
+        
+        if (done) {
+          streamDone = true;
+          break;
+        }
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            try {
+              const data = JSON.parse(line.slice(6));
+              
+              if (data.error) {
+                throw new Error(data.error);
+              }
+              
+              if (data.done) {
+                streamDone = true;
+                setIsLoading(false);
+                break;
+              }
+              
+              if (data.content) {
+                // Update message incrementally
+                setMessages(prev => prev.map(msg => 
+                  msg.id === aiMessageId 
+                    ? { ...msg, text: msg.text + data.content }
+                    : msg
+                ));
+              }
+            } catch (parseError) {
+              console.error('Error parsing SSE data:', parseError);
+              // Continue processing other lines even if one fails
+            }
+          }
+        }
+      }
+
+      setIsLoading(false);
     } catch (error) {
       console.error('Error sending message:', error);
       
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: "Sorry, I'm having trouble connecting to the server. Please try again later.",
-        isUser: false,
-        timestamp: new Date(),
-      };
-
-      setMessages(prev => [...prev, errorMessage]);
+      let errorText = "Sorry, I'm having trouble connecting to the server. Please try again later.";
+      
+      if (error instanceof Error) {
+        if (error.name === 'AbortError' || error.message.includes('timeout')) {
+          errorText = "The request took too long. Please try again with a shorter question.";
+        } else if (error.message.includes('429')) {
+          errorText = "Too many requests. Please wait a moment and try again.";
+        } else if (error.message.includes('500')) {
+          errorText = "Server error. Please try again later.";
+        } else if (error.message) {
+          errorText = error.message;
+        }
+      }
+      
+      // Update the AI message with error, or remove if empty
+      setMessages(prev => {
+        const updated = prev.map(msg => 
+          msg.id === aiMessageId 
+            ? { ...msg, text: errorText }
+            : msg
+        );
+        // Remove message if it's still empty (shouldn't happen, but safety check)
+        return updated.filter(msg => !(msg.id === aiMessageId && msg.text === ''));
+      });
+      
       setIsConnected(false);
-    } finally {
       setIsLoading(false);
+    } finally {
+      // Cleanup: clear timeout and release reader
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      if (reader) {
+        try {
+          reader.releaseLock();
+        } catch (e) {
+          // Reader may already be released
+          console.debug('Reader already released:', e);
+        }
+      }
     }
   };
 
