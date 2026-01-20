@@ -115,7 +115,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
                 Resume
               </a>
               <a
-                href="https://github.com/anmolbaruwal"
+                href="https://github.com/Anmolbaral"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm font-medium px-4 py-3 rounded-xl transition-all"
