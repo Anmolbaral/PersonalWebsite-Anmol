@@ -13,12 +13,23 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
-  // Remove emoji/icons from assistant messages to keep responses text-only
+  // Remove emoji/icons and normalize persona to first-person for assistant messages
   const sanitize_text = (text: string, isUser: boolean) => {
     if (isUser) return text;
-    // Covers common emoji pictographs (including 🚀)
+    // Strip common emoji pictographs (including 🚀)
     const emojiRegex = /[\p{Extended_Pictographic}\p{Emoji_Presentation}]/gu;
-    return text.replace(emojiRegex, '');
+    let cleaned = text.replace(emojiRegex, '');
+
+    // Normalize references to the speaker into first-person
+    cleaned = cleaned.replace(/\bAnmol\s+Baruwal\b/gi, 'I');
+    cleaned = cleaned.replace(/\bAnmol\b/gi, 'I');
+    cleaned = cleaned.replace(/\bhe's\b/gi, "I'm");
+    cleaned = cleaned.replace(/\bhe is\b/gi, 'I am');
+    cleaned = cleaned.replace(/\bhis\b/gi, 'my');
+    cleaned = cleaned.replace(/\bhim\b/gi, 'me');
+    cleaned = cleaned.replace(/\bhe\b/gi, 'I');
+
+    return cleaned;
   };
 
   const cleanedText = sanitize_text(message.text, message.isUser);
