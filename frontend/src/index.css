@@ -4,43 +4,70 @@
 @tailwind utilities;
 
 :root {
+    /* Light (default) neumorphic palette */
     --bg-gradient: #e7e3dc;
-    --chat-bg: rgba(0, 0, 0, 0.15);
-    --border-color: rgba(255, 255, 255, 0.2);
-    --text-primary: #f8fafc;
-    --text-secondary: #cbd5e1;
-    --input-bg: rgba(0, 0, 0, 0.2);
-    --suggestion-bg: rgba(255, 255, 255, 0.1);
-    --suggestion-hover-bg: rgba(255, 255, 255, 0.2);
-    --ai-bubble-bg: #f1f5f9;
-    --ai-bubble-text: #1e293b;
-    --user-bubble-bg: #3b82f6;
-    --user-bubble-text: white;
-    --status-border: #374151;
-    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    --code-bg: rgba(59, 130, 246, 0.15);
-    --code-text: #1e40af;
+    --surface: #e7e3dc;
+    --surface-contrast: #d3cec6;
+    --text-primary: #1e293b;
+    --text-secondary: #5f6369;
+    --input-bg: #e7e3dc;
+    --border-color: rgba(0, 0, 0, 0.08);
+    --shadow-light: #ffffff;
+    --shadow-dark: #c3beb6;
+    --shadow-strong: 20px 20px 60px #c3beb6, -20px -20px 60px #ffffff, inset 2px 2px 5px rgba(255, 255, 255, 0.55), inset -2px -2px 5px rgba(0, 0, 0, 0.04);
+    --shadow-card: 10px 10px 24px #c3beb6, -10px -10px 24px #ffffff;
+    --shadow-button: 6px 6px 12px #c3beb6, -6px -6px 12px #ffffff;
+    --shadow-button-inset: inset 6px 6px 12px #c3beb6, inset -6px -6px 12px #ffffff;
+    --shadow-bubble-user: inset 6px 6px 12px #c3beb6, inset -6px -6px 12px #ffffff;
+    --shadow-bubble-ai: 8px 8px 16px #c3beb6, -8px -8px 16px #ffffff;
     --link-color: #2563eb;
     --link-hover: #1d4ed8;
+    --code-bg: #f5f1ea;
+    --code-text: #1e293b;
+
+    /* Legacy tokens (still used by some components) */
+    --chat-bg: rgba(255, 255, 255, 0.18);
+    --ai-bubble-bg: var(--surface);
+    --ai-bubble-text: var(--text-primary);
+    --user-bubble-bg: var(--surface);
+    --user-bubble-text: var(--text-primary);
+    --suggestion-bg: rgba(0, 0, 0, 0.05);
+    --suggestion-hover-bg: rgba(0, 0, 0, 0.09);
+    --status-border: rgba(0, 0, 0, 0.08);
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
 }
 
-.light-theme {
-    --bg-gradient: #e7e3dc;
-    --chat-bg: rgba(255, 255, 255, 0.3);
-    --border-color: rgba(255, 255, 255, 0.5);
-    --text-primary: #1e293b;
-    --text-secondary: #475569;
-    --input-bg: rgba(255, 255, 255, 0.4);
-    --suggestion-bg: rgba(0, 0, 0, 0.05);
-    --suggestion-hover-bg: rgba(0, 0, 0, 0.1);
-    --ai-bubble-bg: white;
-    --ai-bubble-text: #1e293b;
-    --status-border: #e5e7eb;
-    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
-    --code-bg: rgba(59, 130, 246, 0.2);
-    --code-text: #1e40af;
-    --link-color: #2563eb;
-    --link-hover: #1d4ed8;
+.dark-theme {
+    --bg-gradient: #14151a;
+    --surface: #1c1d22;
+    --surface-contrast: #2a2b32;
+    --text-primary: #f1f2f6;
+    --text-secondary: #a5a7b3;
+    --input-bg: #1c1d22;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --shadow-light: #262832;
+    --shadow-dark: #0f1014;
+    --shadow-strong: 20px 20px 60px #0f1014, -20px -20px 60px #262832, inset 2px 2px 5px rgba(0, 0, 0, 0.25), inset -2px -2px 5px rgba(255, 255, 255, 0.03);
+    --shadow-card: 10px 10px 24px #0f1014, -10px -10px 24px #262832;
+    --shadow-button: 6px 6px 12px #0f1014, -6px -6px 12px #262832;
+    --shadow-button-inset: inset 6px 6px 12px #0f1014, inset -6px -6px 12px #262832;
+    --shadow-bubble-user: inset 6px 6px 12px #0f1014, inset -6px -6px 12px #262832;
+    --shadow-bubble-ai: 8px 8px 16px #0f1014, -8px -8px 16px #262832;
+    --link-color: #8ab4ff;
+    --link-hover: #a9c7ff;
+    --code-bg: #111218;
+    --code-text: #f1f2f6;
+
+    /* Legacy tokens (still used by some components) */
+    --chat-bg: rgba(28, 29, 34, 0.55);
+    --ai-bubble-bg: var(--surface);
+    --ai-bubble-text: var(--text-primary);
+    --user-bubble-bg: var(--surface);
+    --user-bubble-text: var(--text-primary);
+    --suggestion-bg: rgba(255, 255, 255, 0.06);
+    --suggestion-hover-bg: rgba(255, 255, 255, 0.1);
+    --status-border: rgba(255, 255, 255, 0.08);
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 }
 
 body {
@@ -104,90 +131,6 @@ body {
     }
     50% {
         opacity: 0.7;
-    }
-}
-
-@keyframes hammer-swing {
-    0% {
-        transform: rotate(0deg) translateX(0);
-    }
-    15% {
-        transform: rotate(-20deg) translateX(-4px);
-    }
-    25% {
-        transform: rotate(-100deg) translateX(8px);
-    }
-    30% {
-        transform: rotate(-105deg) translateX(8px);
-    }
-    35% {
-        transform: rotate(-100deg) translateX(8px);
-    }
-    100% {
-        transform: rotate(0deg) translateX(0);
-    }
-}
-
-@keyframes worker-bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    25% {
-        transform: translateY(-2px);
-    }
-}
-
-@keyframes spark-1 {
-    0%, 100% {
-        opacity: 0;
-        transform: translate(0, 0) scale(0) rotate(0deg);
-    }
-    20% {
-        opacity: 0;
-    }
-    28% {
-        opacity: 1;
-        transform: translate(-8px, -8px) scale(1.2) rotate(180deg);
-    }
-    50% {
-        opacity: 0;
-        transform: translate(-12px, -12px) scale(0.5) rotate(360deg);
-    }
-}
-
-@keyframes spark-2 {
-    0%, 100% {
-        opacity: 0;
-        transform: translate(0, 0) scale(0) rotate(0deg);
-    }
-    20% {
-        opacity: 0;
-    }
-    28% {
-        opacity: 1;
-        transform: translate(-6px, -4px) scale(1) rotate(90deg);
-    }
-    50% {
-        opacity: 0;
-        transform: translate(-10px, -6px) scale(0.5) rotate(180deg);
-    }
-}
-
-@keyframes spark-3 {
-    0%, 100% {
-        opacity: 0;
-        transform: translate(0, 0) scale(0);
-    }
-    20% {
-        opacity: 0;
-    }
-    28% {
-        opacity: 1;
-        transform: translate(-4px, -6px) scale(1);
-    }
-    50% {
-        opacity: 0;
-        transform: translate(-8px, -10px) scale(0.5);
     }
 }
 

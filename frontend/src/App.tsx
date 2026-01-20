@@ -7,16 +7,15 @@ import type { Message } from './types';
 function App() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
   const [isConnected, setIsConnected] = useState(true);
 
   // Load theme preference on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      setIsDark(false);
-      document.body.classList.add('light-theme');
-    }
+    const should_use_dark = savedTheme === 'dark';
+    setIsDark(should_use_dark);
+    document.body.classList.toggle('dark-theme', should_use_dark);
   }, []);
 
   // Toggle between dark and light themes
@@ -24,13 +23,8 @@ function App() {
     const newTheme = !isDark;
     setIsDark(newTheme);
     
-    if (newTheme) {
-      document.body.classList.remove('light-theme');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.body.classList.add('light-theme');
-      localStorage.setItem('theme', 'light');
-    }
+    document.body.classList.toggle('dark-theme', newTheme);
+    localStorage.setItem('theme', newTheme ? 'dark' : 'light');
   };
 
   // Send message to AI chatbot API with streaming support
@@ -202,7 +196,7 @@ function App() {
       <StatusBar 
         isConnected={isConnected} 
         status={isConnected ? "Connected" : "Disconnected"}
-        liveStatus="📍 Nashville, TN | 🚀 Open to new opportunities"
+        liveStatus="Nashville, TN | Open to new opportunities"
       />
     </div>
   );

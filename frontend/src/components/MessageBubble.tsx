@@ -21,13 +21,12 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
     >
       <div className={`max-w-3xl ${message.isUser ? 'order-2' : 'order-1'}`}>
         <div
-          className={`p-5 rounded-2xl text-base bg-[#e7e3dc] text-stone-800 ${
+          className={`p-5 rounded-2xl text-base text-stone-800 ${
             message.isUser ? 'rounded-br-none' : 'rounded-bl-none'
           }`}
           style={{
-            boxShadow: message.isUser
-              ? 'inset 6px 6px 12px #c3beb6, inset -6px -6px 12px #ffffff'
-              : '8px 8px 16px #c3beb6, -8px -8px 16px #ffffff',
+            background: 'var(--surface)',
+            boxShadow: message.isUser ? 'var(--shadow-bubble-user)' : 'var(--shadow-bubble-ai)',
           }}
         >
           {message.isUser ? (
