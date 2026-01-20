@@ -1,3 +1,4 @@
+/* Tailwind CSS directives - processed at build time */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -72,4 +73,164 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes fadeIn-soft {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn-up {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes pulse-subtle {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes hammer-swing {
+    0% {
+        transform: rotate(0deg) translateX(0);
+    }
+    15% {
+        transform: rotate(-20deg) translateX(-4px);
+    }
+    25% {
+        transform: rotate(-100deg) translateX(8px);
+    }
+    30% {
+        transform: rotate(-105deg) translateX(8px);
+    }
+    35% {
+        transform: rotate(-100deg) translateX(8px);
+    }
+    100% {
+        transform: rotate(0deg) translateX(0);
+    }
+}
+
+@keyframes worker-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-2px);
+    }
+}
+
+@keyframes spark-1 {
+    0%, 100% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0) rotate(0deg);
+    }
+    20% {
+        opacity: 0;
+    }
+    28% {
+        opacity: 1;
+        transform: translate(-8px, -8px) scale(1.2) rotate(180deg);
+    }
+    50% {
+        opacity: 0;
+        transform: translate(-12px, -12px) scale(0.5) rotate(360deg);
+    }
+}
+
+@keyframes spark-2 {
+    0%, 100% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0) rotate(0deg);
+    }
+    20% {
+        opacity: 0;
+    }
+    28% {
+        opacity: 1;
+        transform: translate(-6px, -4px) scale(1) rotate(90deg);
+    }
+    50% {
+        opacity: 0;
+        transform: translate(-10px, -6px) scale(0.5) rotate(180deg);
+    }
+}
+
+@keyframes spark-3 {
+    0%, 100% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0);
+    }
+    20% {
+        opacity: 0;
+    }
+    28% {
+        opacity: 1;
+        transform: translate(-4px, -6px) scale(1);
+    }
+    50% {
+        opacity: 0;
+        transform: translate(-8px, -10px) scale(0.5);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn-soft 0.3s ease-out;
+}
+
+.animate-slide-in {
+    animation: slideIn-up 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-subtle {
+    animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+.animate-hammer-swing {
+    animation: hammer-swing 1.4s ease-in-out infinite;
+}
+
+.animate-worker-bounce {
+    animation: worker-bounce 1.4s ease-in-out infinite;
+}
+
+.animate-spark-1 {
+    animation: spark-1 1.4s ease-out infinite;
+}
+
+.animate-spark-2 {
+    animation: spark-2 1.4s ease-out infinite 0.05s;
+}
+
+.animate-spark-3 {
+    animation: spark-3 1.4s ease-out infinite 0.1s;
 }
