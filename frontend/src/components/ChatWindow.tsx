@@ -232,7 +232,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
         <div className="px-6 md:px-8 py-6 border-t relative z-10"
           style={{ background: 'var(--surface)', borderColor: 'var(--surface-contrast)' }}>
           <form onSubmit={handle_submit} className="flex flex-col gap-3">
-            <div className="flex gap-3 items-end">
+            <div className="flex gap-3 items-center">
               <div className="flex-1 relative">
                 <textarea
                   ref={inputRef}
