@@ -77,11 +77,11 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
                   boxShadow: 'var(--shadow-card)',
                 }}
               >
-                <Sparkles className="w-6 h-6 text-stone-700 animate-pulse-subtle" />
+                <Sparkles className="w-6 h-6 animate-pulse-subtle" style={{ color: 'var(--text-primary)' }} />
               </div>
               <div>
-                <h1 className="text-xl md:text-2xl font-semibold text-stone-800">Anmol Baruwal</h1>
-                <p className="text-sm text-stone-500">Engineer · Educator · Researcher</p>
+                <h1 className="text-xl md:text-2xl font-semibold" style={{ color: 'var(--text-primary)' }}>Anmol Baruwal</h1>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Engineer · Educator · Researcher</p>
               </div>
             </div>
             <div className="flex items-center gap-3 flex-wrap">
@@ -89,20 +89,22 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
                 href="/api/resume"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-medium text-stone-700 px-4 py-3 rounded-xl transition-all"
+                className="text-sm font-medium px-4 py-3 rounded-xl transition-all"
                 style={{
                   background: 'var(--surface)',
                   boxShadow: 'var(--shadow-button)',
+                  color: 'var(--text-primary)',
                 }}
               >
                 View Resume
               </a>
               <button
                 onClick={() => setIsLeaveNoteOpen(true)}
-                className="flex items-center gap-2 text-sm font-medium text-stone-700 px-4 py-3 rounded-xl transition-all"
+                className="flex items-center gap-2 text-sm font-medium px-4 py-3 rounded-xl transition-all"
                 style={{
                   background: 'var(--surface)',
                   boxShadow: 'var(--shadow-button)',
+                  color: 'var(--text-primary)',
                 }}
               >
                 <NotebookPen className="w-4 h-4" />
@@ -123,11 +125,11 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
                   boxShadow: 'var(--shadow-card)',
                 }}
               >
-                <Sparkles className="w-10 h-10 text-stone-600 animate-float" />
+                <Sparkles className="w-10 h-10 animate-float" style={{ color: 'var(--text-primary)' }} />
               </div>
               <div className="space-y-2 max-w-2xl">
-                <h2 className="text-2xl font-semibold text-stone-800">Welcome</h2>
-                <p className="text-stone-600 leading-relaxed">
+                <h2 className="text-2xl font-semibold" style={{ color: 'var(--text-primary)' }}>Welcome</h2>
+                <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                   I craft accessible AI and technology experiences through education, makerspaces, and hands-on building.
                   Ask about the work, approach, or how you can collaborate.
                 </p>
@@ -138,19 +140,20 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
                     key={prompt}
                     type="button"
                     onClick={() => handle_prompt_click(prompt)}
-                  className="px-4 py-2 text-sm text-stone-700 rounded-lg transition-all hover:scale-[1.02]"
+                  className="px-4 py-2 text-sm rounded-lg transition-all hover:scale-[1.02]"
                     style={{
                       background: 'var(--surface)',
                       boxShadow: 'var(--shadow-button)',
+                      color: 'var(--text-primary)',
                     }}
                     onMouseDown={(e) => {
-                      e.currentTarget.style.boxShadow = 'inset 5px 5px 12px #c3beb6, inset -5px -5px 12px #ffffff';
+                      e.currentTarget.style.boxShadow = 'var(--shadow-button-inset)';
                     }}
                     onMouseUp={(e) => {
-                      e.currentTarget.style.boxShadow = '5px 5px 12px #c3beb6, -5px -5px 12px #ffffff';
+                      e.currentTarget.style.boxShadow = 'var(--shadow-button)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = '5px 5px 12px #c3beb6, -5px -5px 12px #ffffff';
+                      e.currentTarget.style.boxShadow = 'var(--shadow-button)';
                     }}
                   >
                     {prompt}
@@ -174,11 +177,11 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
                   >
                     <div className="flex gap-3 items-center">
                       <div className="flex items-center gap-1">
-                        <span className="w-2 h-2 rounded-full bg-stone-500 animate-bounce" />
-                        <span className="w-2 h-2 rounded-full bg-stone-500 animate-bounce" style={{ animationDelay: '0.12s' }} />
-                        <span className="w-2 h-2 rounded-full bg-stone-500 animate-bounce" style={{ animationDelay: '0.24s' }} />
+                        <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--text-secondary)' }} />
+                        <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--text-secondary)', animationDelay: '0.12s' }} />
+                        <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--text-secondary)', animationDelay: '0.24s' }} />
                       </div>
-                      <span className="text-xs text-stone-600 font-medium">crafting response...</span>
+                      <span className="text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>crafting response...</span>
                     </div>
                   </div>
                 </div>
@@ -200,12 +203,15 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
                   onKeyDown={handle_key_down}
                   placeholder="Ask me anything about the work, impact, or story..."
                   rows={1}
-                  className="w-full px-4 py-3 border-none rounded-xl resize-none focus:outline-none transition-all text-stone-800 placeholder-stone-400"
+                  className="w-full px-4 py-3 border-none rounded-xl resize-none focus:outline-none transition-all placeholder:text-[color:var(--text-secondary)]"
                   style={{
                     maxHeight: '140px',
                     minHeight: '52px',
                     background: 'var(--input-bg)',
                     boxShadow: 'var(--shadow-button-inset)',
+                    color: 'var(--text-primary)',
+                    caretColor: 'var(--text-primary)',
+                    transition: 'box-shadow 0.2s ease',
                   }}
                   onFocus={(e) => {
                     e.currentTarget.style.boxShadow = 'inset 7px 7px 14px var(--shadow-dark), inset -7px -7px 14px var(--shadow-light)';
@@ -218,10 +224,11 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
               <button
                 type="submit"
                 disabled={isLoading || !inputValue.trim()}
-                className="px-5 py-3 text-stone-700 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center min-w-[52px] h-[52px] group"
+                className="px-5 py-3 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center min-w-[52px] h-[52px] group"
                 style={{
                   background: 'var(--surface)',
                   boxShadow: 'var(--shadow-button)',
+                  color: 'var(--text-primary)',
                 }}
                 onMouseDown={(e) => {
                   if (!e.currentTarget.disabled) {
@@ -242,16 +249,17 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
                 <Send className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
             </div>
-            <div className="flex items-center justify-between text-xs text-stone-500">
+            <div className="flex items-center justify-between text-xs" style={{ color: 'var(--text-secondary)' }}>
               <span>Press Enter to send · Shift + Enter for a new line</span>
               <button
                 type="button"
                 ref={leaveNoteButtonRef}
                 onClick={() => setIsLeaveNoteOpen(true)}
-                className="px-4 py-2 rounded-lg text-stone-700 transition-all"
+                className="px-4 py-2 rounded-lg transition-all"
                 style={{
                   background: 'var(--surface)',
                   boxShadow: 'var(--shadow-button)',
+                  color: 'var(--text-primary)',
                 }}
                 onMouseDown={(e) => {
                   e.currentTarget.style.boxShadow = 'var(--shadow-button-inset)';

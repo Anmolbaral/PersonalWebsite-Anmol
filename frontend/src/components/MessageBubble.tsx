@@ -21,69 +21,71 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
     >
       <div className={`max-w-3xl ${message.isUser ? 'order-2' : 'order-1'}`}>
         <div
-          className={`p-5 rounded-2xl text-base text-stone-800 ${
+          className={`p-5 rounded-2xl text-base ${
             message.isUser ? 'rounded-br-none' : 'rounded-bl-none'
           }`}
           style={{
             background: 'var(--surface)',
             boxShadow: message.isUser ? 'var(--shadow-bubble-user)' : 'var(--shadow-bubble-ai)',
+            color: 'var(--text-primary)',
           }}
         >
           {message.isUser ? (
-            <p className="whitespace-pre-wrap leading-relaxed text-stone-800">{message.text}</p>
+            <p className="whitespace-pre-wrap leading-relaxed" style={{ color: 'var(--text-primary)' }}>{message.text}</p>
           ) : (
             <div className="markdown-content">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
                   h1: ({ ...props }) => (
-                    <h1 className="text-2xl font-semibold text-stone-800 mt-4 mb-2" {...props} />
+                    <h1 className="text-2xl font-semibold mt-4 mb-2" style={{ color: 'var(--text-primary)' }} {...props} />
                   ),
                   h2: ({ ...props }) => (
-                    <h2 className="text-xl font-semibold text-stone-800 mt-4 mb-2 flex items-center gap-2" {...props} />
+                    <h2 className="text-xl font-semibold mt-4 mb-2 flex items-center gap-2" style={{ color: 'var(--text-primary)' }} {...props} />
                   ),
                   h3: ({ ...props }) => (
-                    <h3 className="text-lg font-semibold text-stone-800 mt-3 mb-2" {...props} />
+                    <h3 className="text-lg font-semibold mt-3 mb-2" style={{ color: 'var(--text-primary)' }} {...props} />
                   ),
-                  p: ({ ...props }) => <p className="text-stone-800 leading-relaxed my-2" {...props} />,
+                  p: ({ ...props }) => <p className="leading-relaxed my-2" style={{ color: 'var(--text-primary)' }} {...props} />,
                   ul: ({ ...props }) => (
-                    <ul className="list-disc list-inside text-stone-800 my-3 space-y-1.5 ml-2" {...props} />
+                    <ul className="list-disc list-inside my-3 space-y-1.5 ml-2" style={{ color: 'var(--text-primary)' }} {...props} />
                   ),
                   ol: ({ ...props }) => (
-                    <ol className="list-decimal list-inside text-stone-800 my-3 space-y-1.5 ml-2" {...props} />
+                    <ol className="list-decimal list-inside my-3 space-y-1.5 ml-2" style={{ color: 'var(--text-primary)' }} {...props} />
                   ),
-                  li: ({ ...props }) => <li className="text-stone-800 ml-2" {...props} />,
-                  strong: ({ ...props }) => <strong className="font-semibold text-stone-800" {...props} />,
-                  em: ({ ...props }) => <em className="italic text-stone-800" {...props} />,
+                  li: ({ ...props }) => <li className="ml-2" style={{ color: 'var(--text-primary)' }} {...props} />,
+                  strong: ({ ...props }) => <strong className="font-semibold" style={{ color: 'var(--text-primary)' }} {...props} />,
+                  em: ({ ...props }) => <em className="italic" style={{ color: 'var(--text-primary)' }} {...props} />,
                   code: ({ inline, children, ...props }: any) => {
                     if (inline) {
                       return (
-                        <code className="bg-[#f5f1ea] text-stone-800 px-1.5 py-0.5 rounded text-sm font-mono" {...props}>
+                        <code className="px-1.5 py-0.5 rounded text-sm font-mono" style={{ background: 'var(--code-bg)', color: 'var(--code-text)' }} {...props}>
                           {children}
                         </code>
                       );
                     }
                     return (
-                      <code className="text-sm font-mono text-stone-800 bg-[#f5f1ea] px-2 py-1 rounded block" {...props}>
+                      <code className="text-sm font-mono px-2 py-1 rounded block" style={{ background: 'var(--code-bg)', color: 'var(--code-text)' }} {...props}>
                         {children}
                       </code>
                     );
                   },
                   pre: ({ children, ...props }: any) => (
                     <pre
-                      className="bg-[#1f2937] text-gray-100 p-4 rounded-lg overflow-x-auto text-sm font-mono my-3"
+                      className="p-4 rounded-lg overflow-x-auto text-sm font-mono my-3"
+                      style={{ background: '#1f2937', color: '#e5e7eb' }}
                       {...props}
                     >
                       {children}
                     </pre>
                   ),
                   blockquote: ({ ...props }) => (
-                    <blockquote className="border-l-4 border-stone-400 pl-4 italic text-stone-700 opacity-90 my-3" {...props} />
+                    <blockquote className="border-l-4 pl-4 italic opacity-90 my-3" style={{ borderColor: 'var(--surface-contrast)', color: 'var(--text-secondary)' }} {...props} />
                   ),
                   a: ({ ...props }) => (
-                    <a className="text-stone-800 underline decoration-stone-500" target="_blank" rel="noopener noreferrer" {...props} />
+                    <a className="underline" style={{ color: 'var(--link-color)' }} target="_blank" rel="noopener noreferrer" {...props} />
                   ),
-                  hr: ({ ...props }) => <hr className="border-stone-300 my-4" {...props} />,
+                  hr: ({ ...props }) => <hr className="my-4" style={{ borderColor: 'var(--surface-contrast)' }} {...props} />,
                 }}
               >
                 {message.text}
@@ -91,19 +93,21 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
             </div>
           )}
         </div>
-        <div className={`text-xs text-stone-500 mt-2 flex items-center gap-2 ${message.isUser ? 'justify-end' : 'justify-start'}`}>
+        <div className={`text-xs mt-2 flex items-center gap-2 ${message.isUser ? 'justify-end' : 'justify-start'}`} style={{ color: 'var(--text-secondary)' }}>
           <span>{format_time(message.timestamp)}</span>
         </div>
       </div>
       {!message.isUser && (
         <div className="order-2 ml-4 flex-shrink-0">
           <div
-            className="w-10 h-10 rounded-2xl flex items-center justify-center text-stone-700 text-base font-semibold bg-[#e7e3dc]"
+            className="w-10 h-10 rounded-2xl flex items-center justify-center text-base font-semibold tracking-tight"
             style={{
-              boxShadow: '6px 6px 12px #c3beb6, -6px -6px 12px #ffffff',
+              background: 'var(--surface)',
+              boxShadow: 'var(--shadow-button)',
+              color: 'var(--text-primary)',
             }}
           >
-            AI
+            AB
           </div>
         </div>
       )}
