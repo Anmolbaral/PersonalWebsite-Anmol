@@ -13,6 +13,16 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
+  // Remove emoji/icons from assistant messages to keep responses text-only
+  const sanitize_text = (text: string, isUser: boolean) => {
+    if (isUser) return text;
+    // Covers common emoji pictographs (including 🚀)
+    const emojiRegex = /[\p{Extended_Pictographic}\p{Emoji_Presentation}]/gu;
+    return text.replace(emojiRegex, '');
+  };
+
+  const cleanedText = sanitize_text(message.text, message.isUser);
+
   return (
     <div
       className={`flex ${message.isUser ? 'justify-end' : 'justify-start'} animate-slide-in`}
@@ -31,7 +41,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
           }}
         >
           {message.isUser ? (
-            <p className="whitespace-pre-wrap leading-relaxed" style={{ color: 'var(--text-primary)' }}>{message.text}</p>
+            <p className="whitespace-pre-wrap leading-relaxed" style={{ color: 'var(--text-primary)' }}>{cleanedText}</p>
           ) : (
             <div className="markdown-content">
               <ReactMarkdown
@@ -88,7 +98,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
                   hr: ({ ...props }) => <hr className="my-4" style={{ borderColor: 'var(--surface-contrast)' }} {...props} />,
                 }}
               >
-                {message.text}
+                {cleanedText}
               </ReactMarkdown>
             </div>
           )}
