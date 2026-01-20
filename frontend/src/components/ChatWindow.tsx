@@ -170,7 +170,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
                 <Sparkles className="w-10 h-10 animate-float" style={{ color: 'var(--text-primary)' }} />
               </div>
               <div className="space-y-2 max-w-2xl">
-                <h2 className="text-2xl font-semibold" style={{ color: 'var(--text-primary)' }}>Welcome</h2>
+                <h2 className="text-2xl font-semibold" style={{ color: 'var(--text-primary)' }}>Hi!</h2>
                 <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 I build scalable software and accessible AI experiences.
                 How can I help you today?
