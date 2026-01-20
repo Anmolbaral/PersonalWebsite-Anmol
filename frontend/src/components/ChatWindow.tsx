@@ -16,6 +16,42 @@ const quick_prompts = [
   "Tell me about your education",
 ];
 
+const HammerAnimation: React.FC = () => (
+  <div className="flex items-center gap-3 h-12 relative">
+    <div
+      className="w-10 h-6 rounded-md animate-worker-bounce"
+      style={{
+        background: 'var(--surface-contrast)',
+        boxShadow: 'var(--shadow-button)',
+      }}
+    />
+    <div className="relative animate-hammer-swing origin-left">
+      <div
+        className="w-8 h-4 rounded-sm"
+        style={{ background: 'var(--text-primary)' }}
+      />
+      <div
+        className="w-7 h-2 rounded-sm ml-2"
+        style={{ background: 'var(--text-secondary)' }}
+      />
+    </div>
+    <div className="absolute left-16 top-2">
+      <div
+        className="w-2 h-2 rounded-full animate-spark-1"
+        style={{ background: 'var(--text-primary)' }}
+      />
+      <div
+        className="w-1.5 h-1.5 rounded-full animate-spark-2 absolute left-3 -top-1"
+        style={{ background: 'var(--link-color)' }}
+      />
+      <div
+        className="w-1.5 h-1.5 rounded-full animate-spark-3 absolute -left-2 top-1"
+        style={{ background: 'var(--text-secondary)' }}
+      />
+    </div>
+  </div>
+);
+
 const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMessage }) => {
   const [inputValue, setInputValue] = useState('');
   const [isLeaveNoteOpen, setIsLeaveNoteOpen] = useState(false);
@@ -176,11 +212,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
                     }}
                   >
                     <div className="flex gap-3 items-center">
-                      <div className="flex items-center gap-1">
-                        <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--text-secondary)' }} />
-                        <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--text-secondary)', animationDelay: '0.12s' }} />
-                        <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--text-secondary)', animationDelay: '0.24s' }} />
-                      </div>
+                      <HammerAnimation />
                       <span className="text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>crafting response...</span>
                     </div>
                   </div>

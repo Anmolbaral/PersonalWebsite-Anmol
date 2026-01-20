@@ -169,3 +169,78 @@ body {
 .animate-spark-3 {
     animation: spark-3 1.4s ease-out infinite 0.1s;
 }
+
+@keyframes hammer-swing {
+    0% {
+        transform: rotate(0deg) translateX(0);
+    }
+    15% {
+        transform: rotate(-20deg) translateX(-4px);
+    }
+    25% {
+        transform: rotate(-90deg) translateX(10px);
+    }
+    30% {
+        transform: rotate(-100deg) translateX(10px);
+    }
+    35% {
+        transform: rotate(-90deg) translateX(10px);
+    }
+    100% {
+        transform: rotate(0deg) translateX(0);
+    }
+}
+
+@keyframes worker-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes spark-1 {
+    0%, 100% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0);
+    }
+    25% {
+        opacity: 1;
+        transform: translate(-6px, -6px) scale(1.2);
+    }
+    60% {
+        opacity: 0;
+        transform: translate(-10px, -10px) scale(0.6);
+    }
+}
+
+@keyframes spark-2 {
+    0%, 100% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0);
+    }
+    25% {
+        opacity: 1;
+        transform: translate(-4px, -2px) scale(1);
+    }
+    60% {
+        opacity: 0;
+        transform: translate(-8px, -4px) scale(0.5);
+    }
+}
+
+@keyframes spark-3 {
+    0%, 100% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0);
+    }
+    25% {
+        opacity: 1;
+        transform: translate(-3px, -5px) scale(1);
+    }
+    60% {
+        opacity: 0;
+        transform: translate(-7px, -8px) scale(0.5);
+    }
+}
