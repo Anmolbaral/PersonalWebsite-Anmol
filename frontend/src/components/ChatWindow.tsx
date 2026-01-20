@@ -11,10 +11,9 @@ interface ChatWindowProps {
 }
 
 const quick_prompts = [
-  "Tell me about your work in assistive technology",
-  "What are sustainable makerspaces?",
-  "How do you use AI in education?",
-  "What are your most impactful projects?",
+  "Show me your projects",
+  "What are your key skills?",
+  "Tell me about your education",
 ];
 
 const HammerAnimation: React.FC = () => (
@@ -99,9 +98,8 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
                 <Sparkles className="w-6 h-6 text-stone-700 animate-pulse-subtle" />
               </div>
               <div>
-                <p className="text-base text-stone-500">Conversational Profile of</p>
                 <h1 className="text-xl md:text-2xl font-semibold text-stone-800">Anmol Baruwal</h1>
-                <p className="text-sm text-stone-500">AI Researcher · Educator · Builder</p>
+                <p className="text-sm text-stone-500">Engineer · Educator · Researcher</p>
               </div>
             </div>
             <div className="flex items-center gap-3 flex-wrap">
