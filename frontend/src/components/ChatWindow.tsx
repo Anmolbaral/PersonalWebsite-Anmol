@@ -126,7 +126,6 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
                 }}
               >
                 <Github className="w-4 h-4" />
-                GitHub
               </a>
               <a
                 href="https://www.linkedin.com/in/anmolbaruwal/"
@@ -140,7 +139,6 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
                 }}
               >
                 <Linkedin className="w-4 h-4" />
-                LinkedIn
               </a>
               <button
                 onClick={() => setIsLeaveNoteOpen(true)}
