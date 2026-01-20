@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Send, Sparkles, NotebookPen } from 'lucide-react';
+import { Send, Sparkles, NotebookPen, Github, Linkedin } from 'lucide-react';
 import MessageBubble from './MessageBubble';
 import LeaveNote from './LeaveNote';
 import type { Message } from '../types';
@@ -112,7 +112,35 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
                   color: 'var(--text-primary)',
                 }}
               >
-                View Resume
+                Resume
+              </a>
+              <a
+                href="https://github.com/anmolbaruwal"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm font-medium px-4 py-3 rounded-xl transition-all"
+                style={{
+                  background: 'var(--surface)',
+                  boxShadow: 'var(--shadow-button)',
+                  color: 'var(--text-primary)',
+                }}
+              >
+                <Github className="w-4 h-4" />
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/anmolbaruwal/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm font-medium px-4 py-3 rounded-xl transition-all"
+                style={{
+                  background: 'var(--surface)',
+                  boxShadow: 'var(--shadow-button)',
+                  color: 'var(--text-primary)',
+                }}
+              >
+                <Linkedin className="w-4 h-4" />
+                LinkedIn
               </a>
               <button
                 onClick={() => setIsLeaveNoteOpen(true)}
@@ -146,8 +174,8 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
               <div className="space-y-2 max-w-2xl">
                 <h2 className="text-2xl font-semibold" style={{ color: 'var(--text-primary)' }}>Welcome</h2>
                 <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                  I craft accessible AI and technology experiences through education, makerspaces, and hands-on building.
-                  Ask about the work, approach, or how you can collaborate.
+                I build scalable software and accessible AI experiences.
+                How can I help you today?
                 </p>
               </div>
               <div className="flex flex-wrap gap-2 justify-center max-w-3xl">
