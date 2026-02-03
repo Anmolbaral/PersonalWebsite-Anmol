@@ -9,8 +9,9 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ isDark, onToggle }) => {
   return (
     <button
       onClick={onToggle}
-      className="fixed top-5 right-5 w-12 h-12 bg-black/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-black/20 transition-all duration-300 z-50"
+      className="fixed top-2 right-2 xs:top-3 xs:right-3 sm:top-5 sm:right-5 md:top-6 md:right-6 w-9 h-9 xs:w-10 xs:h-10 sm:w-12 sm:h-12 bg-black/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-black/20 transition-all duration-300 z-50 touch-manipulation"
       aria-label="Toggle theme"
+      style={{ minWidth: '36px', minHeight: '36px' }}
     >
       {isDark ? (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

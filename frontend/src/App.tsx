@@ -186,7 +186,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-20">
+    <div className="min-h-screen flex items-center justify-center p-2 xs:p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 2xl:p-20">
       <ChatWindow
         messages={messages}
         isLoading={isLoading}

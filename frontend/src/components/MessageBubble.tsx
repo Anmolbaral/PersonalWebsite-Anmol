@@ -40,9 +40,9 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
       role="article"
       aria-label={message.isUser ? 'Your message' : 'AI assistant message'}
     >
-      <div className={`max-w-3xl ${message.isUser ? 'order-2' : 'order-1'}`}>
+      <div className={`w-full xs:max-w-[90%] sm:max-w-[85%] md:max-w-[80%] lg:max-w-3xl ${message.isUser ? 'order-2' : 'order-1'}`}>
         <div
-          className={`p-5 rounded-2xl text-base ${
+          className={`p-2.5 xs:p-3 sm:p-4 md:p-5 lg:p-6 rounded-lg xs:rounded-xl sm:rounded-2xl text-xs xs:text-sm sm:text-base md:text-lg ${
             message.isUser ? 'rounded-br-none' : 'rounded-bl-none'
           }`}
           style={{
@@ -59,13 +59,13 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
                 remarkPlugins={[remarkGfm]}
                 components={{
                   h1: ({ ...props }) => (
-                    <h1 className="text-2xl font-semibold mt-4 mb-2" style={{ color: 'var(--text-primary)' }} {...props} />
+                    <h1 className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-semibold mt-2 xs:mt-3 sm:mt-4 mb-1.5 xs:mb-2" style={{ color: 'var(--text-primary)' }} {...props} />
                   ),
                   h2: ({ ...props }) => (
-                    <h2 className="text-xl font-semibold mt-4 mb-2 flex items-center gap-2" style={{ color: 'var(--text-primary)' }} {...props} />
+                    <h2 className="text-base xs:text-lg sm:text-xl md:text-2xl font-semibold mt-2 xs:mt-3 sm:mt-4 mb-1.5 xs:mb-2 flex items-center gap-1.5 xs:gap-2" style={{ color: 'var(--text-primary)' }} {...props} />
                   ),
                   h3: ({ ...props }) => (
-                    <h3 className="text-lg font-semibold mt-3 mb-2" style={{ color: 'var(--text-primary)' }} {...props} />
+                    <h3 className="text-sm xs:text-base sm:text-lg md:text-xl font-semibold mt-1.5 xs:mt-2 sm:mt-3 mb-1.5 xs:mb-2" style={{ color: 'var(--text-primary)' }} {...props} />
                   ),
                   p: ({ ...props }) => <p className="leading-relaxed my-2" style={{ color: 'var(--text-primary)' }} {...props} />,
                   ul: ({ ...props }) => (
@@ -119,9 +119,9 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
         </div>
       </div>
       {!message.isUser && (
-        <div className="order-2 ml-4 flex-shrink-0">
+        <div className="order-2 ml-1.5 xs:ml-2 sm:ml-4 flex-shrink-0">
           <div
-            className="w-10 h-10 rounded-2xl flex items-center justify-center text-base font-semibold tracking-tight"
+            className="w-7 h-7 xs:w-8 xs:h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg xs:rounded-xl sm:rounded-2xl flex items-center justify-center text-[10px] xs:text-xs sm:text-base md:text-lg font-semibold tracking-tight"
             style={{
               background: 'var(--surface)',
               boxShadow: 'var(--shadow-button)',

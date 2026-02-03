@@ -130,7 +130,7 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose, triggerButtonRef
     >
       <div 
         ref={modalRef}
-        className="bg-[var(--chat-bg)] backdrop-blur-xl border border-[var(--border-color)] rounded-2xl shadow-2xl w-full max-w-md p-6 relative"
+        className="bg-[var(--chat-bg)] backdrop-blur-xl border border-[var(--border-color)] rounded-xl xs:rounded-2xl shadow-2xl w-full max-w-[calc(100vw-1rem)] xs:max-w-sm sm:max-w-md md:max-w-lg p-4 xs:p-5 sm:p-6 relative"
         onKeyDown={(e) => {
           handle_key_down(e);
           handle_tab_key(e);
