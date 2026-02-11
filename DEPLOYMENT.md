@@ -66,6 +66,9 @@ Add these to **Production**, **Preview**, and **Development**:
 | `OPENAI_API_KEY` | Your OpenAI API key |
 | `SUPABASE_URL` | Your Supabase project URL |
 | `SUPABASE_SERVICE_KEY` | Your Supabase service_role key |
+| `RESEND_API_KEY` | (Optional) Resend API key – to receive "Leave a note" submissions in your email |
+| `NOTIFY_EMAIL` | (Optional) Your email address – where note notifications are sent |
+| `NOTIFY_FROM` | (Optional) Sender line, e.g. `Portfolio <onboarding@resend.dev>`. Default works with Resend free tier |
 
 ### 2.4 Deploy
 
@@ -83,6 +86,17 @@ Add these to **Production**, **Preview**, and **Development**:
 ### Update Context
 
 Edit `public/context.md` with your information, then commit and push.
+
+### Email notifications (optional)
+
+To receive "Leave a note" submissions in your inbox:
+
+1. Sign up at [Resend](https://resend.com) (free tier: 100 emails/day).
+2. Create an API key in **API Keys** and add it as `RESEND_API_KEY` in Vercel.
+3. Set `NOTIFY_EMAIL` to your email (e.g. `you@gmail.com`).
+4. Default sender is `Portfolio <onboarding@resend.dev>`. To use your own domain, verify it in Resend and set `NOTIFY_FROM` (e.g. `Portfolio <noreply@yourdomain.com>`).
+
+Notes are always saved to Supabase; email is an optional copy to your inbox.
 
 ### Test
 

@@ -1,6 +1,16 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@supabase/supabase-js';
+import { Resend } from 'resend';
 import { check_rate_limit } from './utils/rate-limit.js';
+
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Only allow POST requests
@@ -65,6 +75,35 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     console.log('Email:', email);
     console.log('IP:', clientIp);
     console.log('========================');
+
+    // Send copy to your inbox if Resend is configured
+    const resendKey = process.env.RESEND_API_KEY;
+    const notifyEmail = process.env.NOTIFY_EMAIL;
+    if (resendKey && notifyEmail) {
+      try {
+        const resend = new Resend(resendKey);
+        const from = process.env.NOTIFY_FROM || 'Portfolio <onboarding@resend.dev>';
+        const { error: emailError } = await resend.emails.send({
+          from,
+          to: notifyEmail,
+          subject: `New note from ${name} (${email})`,
+          html: `
+            <h2>New note from your portfolio</h2>
+            <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+            <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+            ${contactInfo ? `<p><strong>Extra contact:</strong> ${escapeHtml(contactInfo)}</p>` : ''}
+            <p><strong>Message:</strong></p>
+            <pre style="white-space:pre-wrap;font-family:inherit;background:#f4f4f4;padding:12px;border-radius:8px;">${escapeHtml(message)}</pre>
+            <p style="color:#666;font-size:12px;">IP: ${escapeHtml(clientIp)} · Note ID: ${noteData.id}</p>
+          `,
+        });
+        if (emailError) {
+          console.error('Resend email error:', emailError);
+        }
+      } catch (emailErr) {
+        console.error('Failed to send notification email:', emailErr);
+      }
+    }
 
     return res.status(200).json({
       success: true,
