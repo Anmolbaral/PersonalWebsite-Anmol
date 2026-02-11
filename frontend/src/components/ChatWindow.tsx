@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Send, Sparkles, NotebookPen, Github, Linkedin } from 'lucide-react';
+import { Send, Sparkles, NotebookPen, Github, Linkedin, BookOpen } from 'lucide-react';
 import MessageBubble from './MessageBubble';
 import LeaveNote from './LeaveNote';
+import ReadsModal from './ReadsModal';
 import type { Message } from '../types';
 
 interface ChatWindowProps {
@@ -35,8 +36,10 @@ const HammerAnimation: React.FC = () => (
 const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMessage }) => {
   const [inputValue, setInputValue] = useState('');
   const [isLeaveNoteOpen, setIsLeaveNoteOpen] = useState(false);
+  const [isReadsOpen, setIsReadsOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const leaveNoteButtonRef = useRef<HTMLButtonElement>(null);
+  const readsButtonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const scroll_to_bottom = () => {
@@ -147,6 +150,20 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
               >
                 <Linkedin className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
               </a>
+              <button
+                ref={readsButtonRef}
+                onClick={() => setIsReadsOpen(true)}
+                className="flex items-center justify-center text-[10px] xs:text-xs sm:text-sm font-medium px-2 xs:px-3 sm:px-4 py-2 xs:py-2.5 sm:py-3 rounded-md xs:rounded-lg sm:rounded-xl transition-all touch-manipulation"
+                style={{
+                  background: 'var(--surface)',
+                  boxShadow: 'var(--shadow-button)',
+                  color: 'var(--text-primary)',
+                  minHeight: '36px',
+                  minWidth: '36px',
+                }}
+              >
+                <BookOpen className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
+              </button>
               <button
                 onClick={() => setIsLeaveNoteOpen(true)}
                 className="flex items-center gap-1 xs:gap-1.5 sm:gap-2 text-[10px] xs:text-xs sm:text-sm font-medium px-2 xs:px-3 sm:px-4 py-2 xs:py-2.5 sm:py-3 rounded-md xs:rounded-lg sm:rounded-xl transition-all touch-manipulation"
@@ -332,6 +349,11 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, isLoading, onSendMess
         isOpen={isLeaveNoteOpen}
         onClose={() => setIsLeaveNoteOpen(false)}
         triggerButtonRef={leaveNoteButtonRef}
+      />
+      <ReadsModal
+        isOpen={isReadsOpen}
+        onClose={() => setIsReadsOpen(false)}
+        triggerButtonRef={readsButtonRef}
       />
     </div>
   );
