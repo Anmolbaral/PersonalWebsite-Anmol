@@ -20,6 +20,14 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose, triggerButtonRef
   const firstFocusableRef = useRef<HTMLButtonElement>(null);
   const lastFocusableRef = useRef<HTMLButtonElement>(null);
 
+  const apply_field_focus = (element: HTMLInputElement | HTMLTextAreaElement) => {
+    element.style.boxShadow = 'inset 7px 7px 14px var(--shadow-dark), inset -7px -7px 14px var(--shadow-light)';
+  };
+
+  const apply_field_blur = (element: HTMLInputElement | HTMLTextAreaElement) => {
+    element.style.boxShadow = 'var(--shadow-button-inset)';
+  };
+
   // Submit note form to API
   const handle_submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -130,7 +138,12 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose, triggerButtonRef
     >
       <div 
         ref={modalRef}
-        className="bg-[var(--chat-bg)] backdrop-blur-xl border border-[var(--border-color)] rounded-xl xs:rounded-2xl shadow-2xl w-full max-w-[calc(100vw-1rem)] xs:max-w-sm sm:max-w-md md:max-w-lg p-4 xs:p-5 sm:p-6 relative"
+        className="backdrop-blur-xl border rounded-xl xs:rounded-2xl w-full max-w-[calc(100vw-1rem)] xs:max-w-sm sm:max-w-md md:max-w-lg p-4 xs:p-5 sm:p-6 relative"
+        style={{
+          background: 'var(--surface)',
+          borderColor: 'var(--surface-contrast)',
+          boxShadow: 'var(--shadow-strong)',
+        }}
         onKeyDown={(e) => {
           handle_key_down(e);
           handle_tab_key(e);
@@ -142,7 +155,12 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose, triggerButtonRef
           onClick={onClose}
           disabled={isSubmitting}
           aria-label="Close dialog"
-          className="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+          className="absolute top-4 right-4 transition-colors focus:outline-none rounded-lg p-1"
+          style={{
+            color: 'var(--text-secondary)',
+            background: 'var(--surface)',
+            boxShadow: 'var(--shadow-button)',
+          }}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -153,8 +171,15 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose, triggerButtonRef
           <>
             {/* Header */}
             <div className="text-center mb-6">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-3">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div
+                className="inline-flex items-center justify-center w-12 h-12 rounded-full mb-3"
+                style={{
+                  background: 'var(--surface)',
+                  boxShadow: 'var(--shadow-card)',
+                  color: 'var(--text-primary)',
+                }}
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                 </svg>
               </div>
@@ -175,7 +200,13 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose, triggerButtonRef
                   value={formData.name}
                   onChange={handle_change}
                   required
-                  className="w-full bg-[var(--input-bg)] text-[var(--text-primary)] placeholder-[var(--text-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm transition-all duration-200"
+                  className="w-full text-[var(--text-primary)] placeholder-[var(--text-secondary)] rounded-lg px-4 py-3 focus:outline-none transition-all duration-200"
+                  style={{
+                    background: 'var(--input-bg)',
+                    boxShadow: 'var(--shadow-button-inset)',
+                  }}
+                  onFocus={(e) => apply_field_focus(e.currentTarget)}
+                  onBlur={(e) => apply_field_blur(e.currentTarget)}
                   placeholder="Your name"
                 />
               </div>
@@ -191,7 +222,13 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose, triggerButtonRef
                   value={formData.email}
                   onChange={handle_change}
                   required
-                  className="w-full bg-[var(--input-bg)] text-[var(--text-primary)] placeholder-[var(--text-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm transition-all duration-200"
+                  className="w-full text-[var(--text-primary)] placeholder-[var(--text-secondary)] rounded-lg px-4 py-3 focus:outline-none transition-all duration-200"
+                  style={{
+                    background: 'var(--input-bg)',
+                    boxShadow: 'var(--shadow-button-inset)',
+                  }}
+                  onFocus={(e) => apply_field_focus(e.currentTarget)}
+                  onBlur={(e) => apply_field_blur(e.currentTarget)}
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -207,7 +244,13 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose, triggerButtonRef
                   onChange={handle_change}
                   required
                   rows={4}
-                  className="w-full bg-[var(--input-bg)] text-[var(--text-primary)] placeholder-[var(--text-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm transition-all duration-200 resize-none"
+                  className="w-full text-[var(--text-primary)] placeholder-[var(--text-secondary)] rounded-lg px-4 py-3 focus:outline-none transition-all duration-200 resize-none"
+                  style={{
+                    background: 'var(--input-bg)',
+                    boxShadow: 'var(--shadow-button-inset)',
+                  }}
+                  onFocus={(e) => apply_field_focus(e.currentTarget)}
+                  onBlur={(e) => apply_field_blur(e.currentTarget)}
                   placeholder="Your message..."
                 />
               </div>
@@ -222,7 +265,13 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose, triggerButtonRef
                   name="contactInfo"
                   value={formData.contactInfo || ''}
                   onChange={handle_change}
-                  className="w-full bg-[var(--input-bg)] text-[var(--text-primary)] placeholder-[var(--text-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm transition-all duration-200"
+                  className="w-full text-[var(--text-primary)] placeholder-[var(--text-secondary)] rounded-lg px-4 py-3 focus:outline-none transition-all duration-200"
+                  style={{
+                    background: 'var(--input-bg)',
+                    boxShadow: 'var(--shadow-button-inset)',
+                  }}
+                  onFocus={(e) => apply_field_focus(e.currentTarget)}
+                  onBlur={(e) => apply_field_blur(e.currentTarget)}
                   placeholder="Phone, LinkedIn, etc. (optional)"
                 />
               </div>
@@ -231,11 +280,16 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose, triggerButtonRef
                 ref={lastFocusableRef}
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="w-full disabled:opacity-50 disabled:cursor-not-allowed font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 focus:outline-none"
+                style={{
+                  background: 'var(--surface)',
+                  boxShadow: 'var(--shadow-button)',
+                  color: 'var(--text-primary)',
+                }}
               >
                 {isSubmitting ? (
                   <>
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <div className="w-4 h-4 border-2 border-[var(--text-primary)] border-t-transparent rounded-full animate-spin"></div>
                     <span>Sending...</span>
                   </>
                 ) : (
@@ -252,8 +306,15 @@ const LeaveNote: React.FC<LeaveNoteProps> = ({ isOpen, onClose, triggerButtonRef
         ) : (
           /* Success message */
           <div className="text-center py-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500 rounded-full mb-4">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div
+              className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4"
+              style={{
+                background: 'var(--surface)',
+                boxShadow: 'var(--shadow-card)',
+                color: 'var(--text-primary)',
+              }}
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
