@@ -112,9 +112,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   } catch (error) {
     console.error('Error in leave-note endpoint:', error);
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    const isUnreachable = /ENOTFOUND|fetch failed|ECONNREFUSED|ETIMEDOUT/i.test(message);
     return res.status(500).json({
-      error: 'An error occurred while processing your request.',
-      details: error instanceof Error ? error.message : 'Unknown error'
+      error: isUnreachable
+        ? 'Database is temporarily unreachable. If you use Supabase free tier, check the dashboard — the project may be paused and need restoring.'
+        : 'An error occurred while processing your request.',
+      details: process.env.NODE_ENV === 'development' ? message : undefined
     });
   }
 }

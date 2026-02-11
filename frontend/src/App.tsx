@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ChatWindow from './components/ChatWindow';
+import ReadsSection from './components/ReadsSection';
 import ThemeToggle from './components/ThemeToggle';
 import StatusBar from './components/StatusBar';
 import type { Message } from './types';
@@ -186,7 +187,8 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-2 xs:p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 2xl:p-20">
+    <div className="min-h-screen flex flex-col items-center p-2 xs:p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 2xl:p-20 gap-4 sm:gap-6 pb-24">
+      <ReadsSection />
       <ChatWindow
         messages={messages}
         isLoading={isLoading}

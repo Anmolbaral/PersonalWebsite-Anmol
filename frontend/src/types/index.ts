@@ -33,3 +33,11 @@ export interface NoteSubmission {
   message: string;
   contactInfo?: string;
 }
+
+export interface ReadItem {
+  title: string;
+  author?: string;
+  url?: string;
+  status: 'reading' | 'read';
+  note?: string;
+}
