@@ -1,21 +1,31 @@
-# Anmol Baruwal - Portfolio Website
+# Anmol Baruwal — Portfolio
 
-AI-powered portfolio website with chatbot assistant.
+A minimal, production portfolio for Anmol Baruwal. It presents selected AI systems, product work, experience, education, contact links, and the current résumé without authentication, analytics, or an application backend.
 
-## Features
+## Run locally
 
-- 🤖 AI Chatbot
-- 📝 Contact Form
-- 🎨 Dark/Light Theme
-- 📱 Responsive Design
+Requirements: Node.js 22.13 or newer.
 
-## Tech Stack
+```bash
+npm ci
+npm run dev
+```
 
-React, TypeScript, Vite, Tailwind CSS, Vercel, Supabase, OpenAI
+Before publishing:
 
-## Contact
+```bash
+npm run typecheck
+npm run build
+```
 
-**Anmol Baruwal**
-- Email: Anmolbaruwal01@gmail.com
-- LinkedIn: [linkedin.com/in/anmol-baruwal-288607178](https://www.linkedin.com/in/anmol-baruwal-288607178/)
-- GitHub: [@Anmolbaral](https://github.com/Anmolbaral)
+## Update content
+
+- Edit profile, project, and experience copy in `src/data/portfolio.ts`.
+- Replace `public/AnmolBaruwal__Resume.pdf` to update the résumé download.
+- Keep design changes in `src/PortfolioApp.tsx` and `src/portfolio.css`.
+
+The site is deployed with OpenAI Sites through the Vite integration in `vite.config.ts`.
+
+## Rights
+
+No open-source license is granted. Personal content, résumé material, and branding remain © Anmol Baruwal.
