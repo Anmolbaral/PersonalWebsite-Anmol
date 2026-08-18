@@ -1,0 +1,15 @@
+import { sites } from '@openai/sites-vite-plugin';
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  plugins: [react(), sites()],
+  css: {
+    postcss: { plugins: [] },
+  },
+  build: {
+    outDir: 'dist/client',
+    sourcemap: true,
+    emptyOutDir: true,
+  },
+});
