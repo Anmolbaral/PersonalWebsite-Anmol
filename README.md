@@ -4,7 +4,7 @@ A minimal, production portfolio for Anmol Baruwal. It presents selected AI syste
 
 ## Run locally
 
-Requirements: Node.js 22.13 or newer.
+Requirements: Node.js 24.x.
 
 ```bash
 npm ci
