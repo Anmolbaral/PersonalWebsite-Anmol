@@ -75,7 +75,6 @@ function PortfolioApp() {
             <div className="section-intro">
               <div>
                 <h2 id="work-title">A few things I’m proud to have built.</h2>
-                <p>Selected for the problem solved and the result—not for the size of the technology list.</p>
               </div>
             </div>
 

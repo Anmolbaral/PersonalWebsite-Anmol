@@ -179,7 +179,7 @@ nav a:hover,
 .section-intro h2,
 .contact-section h2 {
   max-width: 15ch;
-  margin: -0.2rem 0 1rem;
+  margin: -0.2rem 0 0;
   font-family: var(--display);
   font-size: clamp(2.45rem, 5vw, 4.4rem);
   font-weight: 400;
@@ -187,10 +187,8 @@ nav a:hover,
   line-height: 1;
 }
 
-.section-intro > div > p:not(.about-copy, .education-line) {
-  max-width: 58ch;
-  margin: 0;
-  color: var(--muted);
+.about-intro h2 {
+  margin-bottom: 1rem;
 }
 
 .project-list {
